@@ -58,3 +58,11 @@ tests/                 core unit tests + API contract tests
 
 | Endpoint | Purpose |
 |---|---|
+| `POST /api/translate`, `/api/translate-claude` | Simple translation |
+| `POST /api/godmode`, `/api/godmode-claude` | God Mode translation |
+| `POST /api/verify-translation(-claude)` | Independent checklist grading |
+| `POST /api/fix-translation(-claude)` | Targeted fix of failing checks |
+| `POST /api/review-translation` | Gemini QA review |
+| `POST /api/models`, `/api/claude-models` | Model catalogs. These never fail: on error they return the fallback list |
+
+Interactive docs are at `/api/docs`.
