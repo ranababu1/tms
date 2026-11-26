@@ -313,3 +313,18 @@ async def fix(provider: str, body: dict) -> dict:
     checks = [
         {"description": str(c.get("description", "")), "note": str(c.get("note") or "")}
         for c in (raw_checks if isinstance(raw_checks, list) else [])
+        if isinstance(c, dict)
+    ]
+    _require(bool(checks), "At least one failing check is required.")
+
+    c = await _complete(
+        provider, body, pb.build_fix_prompt(target, checks),
+        pb.build_fix_user_message(original, current),
+        temperature=0.5,
+        max_tokens=8192 if provider == "gemini" else M.CLAUDE_DEFAULT_MAX_OUTPUT_TOKENS,
+    )
+    if not c.text.strip():
+        raise ServiceError(500, "No fix response was returned by the model.")
+    return {"translatedText": c.text.strip(), "usage": c.usage.as_dict()}
+
+
