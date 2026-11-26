@@ -298,3 +298,18 @@
     input.style.height = clamp(input.scrollHeight + 2, 360, 500) + "px";
   }
   function renderInputState() {
+    const n = input.value.length;
+    $("input-counter").textContent = `${full.format(n)} chars | ~${full.format(Math.ceil(n / 4))} tokens`;
+    $("key-hint").classList.toggle("hidden", S.apiKey.trim().length >= 10);
+    const noText = !input.value.trim();
+    btnTranslate.disabled = noText || S.busy;
+    btnTranslate.classList.toggle("btn-translate-live", S.busy && S.phase === "translate");
+    btnTranslate.querySelector(".label").textContent =
+      S.busy && S.phase === "translate" ? "Translating..." : "Translate";
+    if (btnReview) {
+      btnReview.disabled = noText || S.busy;
+      btnReview.textContent = S.busy && S.phase === "review" ? "Reviewing..." : "Translate and Review";
+    }
+    swapBtn.disabled = S.source === "auto" || S.busy;
+  }
+  input.addEventListener("input", () => { autoResize(); renderInputState(); });
