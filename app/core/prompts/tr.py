@@ -43,3 +43,18 @@ Non-negotiable — use exactly as listed, every time, no paraphrasing.
 - Turkish is verb-final: the main verb comes last. Long English sentences with many subordinate clauses become unreadable — break them up.
 - Max 20 words/sentence, natural flowing rhythm.
 - Work with Turkish word order — do not force English SVO structure onto Turkish sentences.
+- Restructure heavily branching sentences into shorter, active, sequential statements.
+
+### Avoid over-agglutination
+- Turkish affixes are powerful, but stacking too many suffixes creates unreadable words.
+  ❌ "kişiselleştirilmiş hedeflenmiş mesajlaşma" (stacked past-participial modifiers)
+  ✅ "hedef kitlene özel mesajlar" / "kişiye özel mesajlaşma"
+- Break complex noun chains into readable phrases.
+
+### Active voice (mandatory)
+- Use active voice in the vast majority of sentences. Avoid passive constructions like "yapılmaktadır", "gerçekleştirilmektedir" — they sound bureaucratic and corporate.
+  ❌ "Kampanyalar platform tarafından otomatik olarak tetiklenmektedir."
+  ✅ "Platform kampanyalarını otomatik olarak tetikler." / "Kampanyalarını tek tıkla başlat."
+
+### Avoid bureaucratic constructions
+- ❌ "-mek suretiyle" (by means of doing) → use direct verb forms.
