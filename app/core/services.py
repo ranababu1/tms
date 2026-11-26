@@ -208,3 +208,18 @@ async def godmode_gemini(body: dict) -> dict:
     return _godmode_response(c, body)
 
 
+async def godmode_claude(body: dict) -> dict:
+    text, target, model = _s(body, "text"), _s(body, "targetLang"), _s(body, "model")
+    source = _s(body, "sourceLang") or "auto"
+    _require(bool(text.strip()), "Text to translate is required.")
+    _require(bool(target), "Target language is required.")
+    _require(_key_ok(body), "Invalid or missing API key.")
+    _require(bool(model), "Model selection is required.")
+    _require(M.is_allowed_claude_model(model), "Invalid model selection.")
+    _check_languages(source, target)
+
+    max_tokens = int(_clamp(
+        _num(body, "maxOutputTokens", M.CLAUDE_DEFAULT_MAX_OUTPUT_TOKENS),
+        1, M.CLAUDE_GODMODE_MAX_OUTPUT_CAP,
+    ))
+    extra = _claude_sampling(
