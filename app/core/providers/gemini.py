@@ -73,3 +73,18 @@ async def generate(
         text = response.text or ""
     except (ValueError, AttributeError):
         text = ""
+    meta = response.usage_metadata
+    usage = Usage(
+        getattr(meta, "prompt_token_count", 0) or 0,
+        getattr(meta, "candidates_token_count", 0) or 0,
+        getattr(meta, "total_token_count", 0) or 0,
+    )
+    return Completion(text=text, usage=usage, finish_reason=_finish_reason(response))
+
+
+async def get_model_limits(api_key: str, model_ids: list[str]) -> dict[str, tuple[int, int]]:
+    """Fetch (input, output) token limits per alias in parallel; failed aliases are dropped."""
+    client = _client(api_key)
+
+    async def one(model_id: str):
+        info = await client.aio.models.get(model=model_id)
