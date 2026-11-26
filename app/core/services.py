@@ -88,3 +88,18 @@ def _claude_sampling(model: str, temperature: float, top_k: int | None = None) -
     if top_k is not None:
         params["top_k"] = top_k
     return params
+
+
+def _translate_response(c: Completion, body: dict, parsed: dict) -> dict:
+    return {
+        **parsed,
+        "model": _s(body, "model"),
+        "sourceLang": _s(body, "sourceLang"),
+        "targetLang": _s(body, "targetLang"),
+        "usage": c.usage.as_dict(),
+    }
+
+
+# ---- simple translate -----------------------------------------------------
+
+async def translate_gemini(body: dict) -> dict:
