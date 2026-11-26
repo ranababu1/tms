@@ -43,3 +43,18 @@ def test_god_template_seed():
 
 def test_godmode_interpolation_is_global_and_appends_rules():
     out = pb.build_godmode_system_prompt("{sourceLang}->{targetLang} {sourceLang}", "auto", "fr")
+    assert out.startswith("auto-detected->French auto-detected\nCODE/MARKUP RULES (non-negotiable):")
+    assert out.endswith("10. Do NOT wrap output in markdown code blocks or any other formatting.")
+
+
+def test_verification_prompt_note_only_for_fallback():
+    assert "this checklist was written for German" not in pb.build_verification_prompt("de")
+    es = pb.build_verification_prompt("es")
+    assert "checking a Spanish marketing translation" in es
+    assert "judge the Spanish equivalent instead." in es
+    assert "1. No passive voice?\n2." in es
+
+
+def test_fix_prompt():
+    checks = [{"description": "No passive voice?", "note": "Sentence 2 is passive"},
+              {"description": "CTA natural?", "note": ""}]
