@@ -43,3 +43,18 @@ def test_pages_render(path):
         assert 'id="page-config"' in r.text
 
 
+def test_static_assets():
+    for path in ("/static/css/app.css", "/static/js/tool.js", "/static/js/constellation.js"):
+        assert client.get(path).status_code == 200
+
+
+# ---- common errors --------------------------------------------------------
+
+def test_invalid_json_body():
+    r = client.post("/api/translate", content=b"{not json", headers={"Content-Type": "application/json"})
+    assert r.status_code == 400 and r.json() == {"error": "Invalid request body."}
+
+
+@pytest.mark.parametrize("body,msg", [
+    ({}, "Text to translate is required."),
+    ({"text": "hi"}, "Target language is required."),
