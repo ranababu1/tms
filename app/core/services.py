@@ -238,3 +238,18 @@ async def godmode_claude(body: dict) -> dict:
     except Exception:
         raise ServiceError(500, "An unexpected error occurred.") from None
     if not c.text.strip():
+        raise ServiceError(500, "No translation returned. The model may have produced empty output.")
+    return _godmode_response(c, body)
+
+
+# ---- verification and fix -------------------------------------------------
+
+_PROVIDER_KEY_MSG = {
+    "gemini": "A valid Gemini API key is required.",
+    "claude": "A valid Anthropic API key is required.",
+}
+
+
+def _validate_model(provider: str, model: str) -> None:
+    if provider == "gemini":
+        _require(bool(model), "Model selection is required.")
