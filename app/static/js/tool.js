@@ -628,3 +628,18 @@
     render();
   }
 
+  function newTranslation() {
+    resetResults();
+    input.value = "";
+    autoResize();
+    S.panel = "input";
+    render();
+    input.focus();
+  }
+
+  // ---------- API key modal ----------
+  const keyModal = $("key-modal");
+  const keyInput = $("key-input");
+  const keyToggle = $("key-toggle");
+  const verifyBox = $("verify-checkbox");
+  const keyModalOpen = () => !keyModal.classList.contains("hidden");
