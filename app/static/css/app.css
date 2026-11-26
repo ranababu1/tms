@@ -88,3 +88,18 @@ main.tool-main { padding: 28px 0 0; }
 .card-pad { padding: 18px; }
 .stack { display: flex; flex-direction: column; gap: 16px; }
 
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 8px 14px; border-radius: 10px; border: 1px solid var(--border-default);
+  background: var(--surface-raised); color: var(--text-body); cursor: pointer;
+  font-size: 13px; transition: border-color .15s, background .15s, color .15s;
+  white-space: nowrap;
+}
+.btn:hover:not(:disabled) { border-color: var(--accent); color: var(--text-primary); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn-ghost { background: transparent; }
+.btn-sm { padding: 5px 10px; font-size: 12px; border-radius: 8px; }
+.btn-accent { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+.btn-translate {
+  position: relative; overflow: hidden;
