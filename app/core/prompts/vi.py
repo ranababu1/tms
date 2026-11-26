@@ -133,3 +133,4 @@ Work through each check below. Mark each PASS or FAIL with a one-line note.
 
 <final>
 Rewrite the translation, correcting every FAIL item from your critique. This is the only section shown to the user — make it perfect.
+</final>"""
