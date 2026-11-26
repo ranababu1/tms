@@ -28,3 +28,18 @@ def _load(name: str) -> dict | None:
             return entry
     except (OSError, ValueError, AttributeError):
         pass
+    return None
+
+
+def _store(name: str, models: list[dict]) -> dict:
+    entry = {"models": models, "fetchedAt": time.time()}
+    _memory[name] = entry
+    try:
+        CACHE_DIR.mkdir(exist_ok=True)
+        _path(name).write_text(json.dumps(entry), encoding="utf-8")
+    except OSError:
+        pass  # memory cache still works
+    return entry
+
+
+async def get_cached_models(name: str, fetch: Callable[[], Awaitable[list[dict]]]) -> dict:
