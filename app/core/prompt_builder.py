@@ -43,3 +43,18 @@ def get_prompt_template_for_lang(lang: str) -> str:
 
 def get_verification_checklist(lang: str) -> list[str]:
     """Numbered critique items — the single source of truth for verify and fix."""
+    mod = TEMPLATES.get(lang, TEMPLATES["de"])
+    match = _CRITIQUE_RE.search(mod.TWO_PHASE_OUTPUT_FORMAT)
+    if not match:
+        return []
+    return [item.strip() for item in _ITEM_RE.findall(match.group(1))]
+
+
+def build_verification_prompt(lang: str) -> str:
+    checklist = get_verification_checklist(lang)
+    checklist_text = "\n".join(f"{i + 1}. {item}" for i, item in enumerate(checklist))
+    name = language_name(lang)
+    note = "" if lang in TEMPLATES else common.CHECKLIST_NOTE.replace("{LangName}", name)
+    return (
+        common.VERIFY_PROMPT.replace("{LangName}", name)
+        .replace("{checklistText}", checklist_text)
