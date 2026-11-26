@@ -43,3 +43,18 @@ async def create_message(
     system: str,
     user: str,
     max_tokens: int,
+    temperature: float | None = None,
+    top_k: int | None = None,
+    effort: str | None = None,
+) -> Completion:
+    body: dict = {
+        "model": model,
+        "max_tokens": max_tokens,
+        "system": system,
+        "messages": [{"role": "user", "content": user}],
+    }
+    if temperature is not None:
+        body["temperature"] = temperature
+    if top_k is not None:
+        body["top_k"] = top_k
+    if effort is not None:
