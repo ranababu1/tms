@@ -208,3 +208,18 @@ def test_review(monkeypatch):
     assert "native Turkish speaker" in calls[0]["args"][2]
     monkeypatch.setattr(services.gemini, "generate", fake("{oops"))
     data = post("/api/review-translation", body).json()
+    assert data["issues"] == ["Review parsing failed. Raw review returned."]
+
+
+# ---- model catalogs -------------------------------------------------------
+
+def test_models_fallback_on_provider_error(monkeypatch):
+    async def boom(*a, **k):
+        raise ProviderError("bad key", 401)
+    monkeypatch.setattr(services.claude, "list_models", boom)
+    r = post("/api/claude-models", {"apiKey": KEY})
+    assert r.status_code == 200
+    data = r.json()
+    assert data["fallback"] is True and data["fetchedAt"] is None
+    assert [m["id"] for m in data["models"]] == ["claude-opus-5-5", "claude-sonnet-5", "claude-haiku-4-5"]
+    assert post("/api/models", {"apiKey": "x"}).status_code == 400
