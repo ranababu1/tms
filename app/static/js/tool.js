@@ -523,3 +523,18 @@
       render();
       let v;
       try {
+        v = await postJSON(cfg.endpoints.verify, { ...common, translatedText: current });
+      } catch (e) {
+        S.retryError = e.message;
+        S.attempts.push({ n: attempt, error: e.message, translatedText: current });
+        break;
+      }
+      addUsage(v.usage);
+      S.attempts.push({ n: attempt, translatedText: current, checklist: v.checklist, results: v.results, allPassed: v.allPassed });
+      if (v.allPassed || attempt >= L.maxAttempts) break;
+      const failing = v.results
+        .map((r, idx) => ({ r, idx }))
+        .filter(({ r }) => !r.pass)
+        .map(({ r, idx }) => ({ description: v.checklist[idx], note: r.note }));
+      if (!failing.length) break;
+      S.pending = { n: attempt + 1, kind: "fix" };
