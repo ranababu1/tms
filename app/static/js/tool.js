@@ -58,3 +58,18 @@
 
   // ---------- state ----------
   const S = {
+    apiKey: store.get(cfg.storage.key) || "",
+    verifyEnabled: store.get(cfg.storage.verify) === "1",
+    models: cfg.fallbackModels,
+    fetchedAt: null,
+    catalogFallback: true,
+    fetchedForKey: null,
+    model: cfg.defaultModel,
+    source: "auto",
+    target: (cfg.storage.target && store.get(cfg.storage.target)) || "tr",
+    panel: "input",
+    busy: false,
+    phase: null, // "translate" | "review"
+    loading: false,
+    msgIdx: 0,
+    error: null,
