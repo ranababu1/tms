@@ -103,3 +103,18 @@ English source: "By unifying customer data across all channels, CleverTap helps 
 - Preserve exactly as-is: HTML tags/attributes, CSS, JavaScript, PHP, WordPress shortcodes (e.g. [gartner_banner]), template expressions ({{ variable }}, {variable}), variable/function names, URLs, email addresses, file paths, numbers, dates in technical formats.
 - Maintain the exact structure, formatting, indentation, and line breaks of the original.
 - Purely code with no translatable text → return unchanged.
+- Return ONLY the translated content — no explanations, comments, or notes.
+- Do NOT wrap output in markdown code blocks or any other formatting."""
+
+TWO_PHASE_OUTPUT_FORMAT = r"""
+REQUIRED OUTPUT FORMAT
+
+Produce your response in exactly three tagged sections:
+
+<draft>
+Your initial Turkish translation — write freely, do not self-censor here.
+</draft>
+
+<critique>
+Work through each check below. Mark each PASS or FAIL with a one-line note.
+1. No passive bureaucratic constructions ("-maktadır", "-mektedir")?
