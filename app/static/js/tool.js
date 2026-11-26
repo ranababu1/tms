@@ -148,3 +148,18 @@
     );
     targetSelect.replaceChildren(
       ...cfg.languages.filter((l) => l.code !== "auto").map((l) =>
+        el("option", {
+          value: l.code,
+          selected: l.code === S.target,
+          class: !isGod && !cfg.languagesWithPrompt.includes(l.code) ? "no-prompt" : null,
+        }, l.label)
+      )
+    );
+    targetSelect.classList.toggle(
+      "no-prompt-selected", !isGod && !cfg.languagesWithPrompt.includes(S.target)
+    );
+    targetSelect.style.color = !isGod && !cfg.languagesWithPrompt.includes(S.target) ? "var(--violet)" : "";
+    swapBtn.disabled = S.source === "auto" || S.busy;
+  }
+
+  function setTarget(newTarget) {
