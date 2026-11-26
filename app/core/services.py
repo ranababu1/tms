@@ -118,3 +118,18 @@ async def translate_gemini(body: dict) -> dict:
             disable_safety=True, temperature=0.7, top_p=0.95,
             max_output_tokens=requested if requested > 0 else M.GEMINI_DEFAULT_MAX_OUTPUT_TOKENS,
         )
+    except ProviderError as exc:
+        raise ServiceError(500, exc.message) from None
+    if c.finish_reason == "safety":
+        raise ServiceError(422, "Content was blocked by safety filters. Try rephrasing.")
+    if not c.text.strip():
+        raise ServiceError(500, "No translation was returned. The model may have produced empty output.")
+    return _translate_response(c, body, parsing.parse_tags(c.text))
+
+
+async def translate_claude(body: dict) -> dict:
+    text, target, model = _s(body, "text"), _s(body, "targetLang"), _s(body, "model")
+    source = _s(body, "sourceLang") or "auto"
+    _require(bool(text.strip()), "Text to translate is required.")
+    _require(bool(target), "Target language is required.")
+    _require(bool(_s(body, "apiKey").strip()), "API key is required.")
