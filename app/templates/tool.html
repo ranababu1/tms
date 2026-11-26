@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ cfg.title }} — Transcreator{% endblock %}
+{% block accent %}{{ cfg.accent }}{% endblock %}
+{% block body %}
+{% set god = cfg.mode == "god" %}
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/">
+      <span class="brand-badge {{ 'godmode-heartbeat' if god }}">{{ "G" if god else "T" }}</span>
+      <span>{{ cfg.title }}</span>
+    </a>
+    <span class="header-spacer"></span>
+    <div class="header-actions">
+      <a class="btn btn-sm btn-ghost" href="{{ cfg.modeLink.href }}">{{ cfg.modeLink.label }}</a>
+      <button class="btn btn-sm btn-accent" id="btn-set-key" type="button">Set API Key</button>
