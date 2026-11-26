@@ -118,3 +118,18 @@ def claude_model(model_id: str, label: str | None = None) -> dict:
 
 
 def claude_fallback_models() -> list[dict]:
+    return [claude_model(mid, label) for mid, label in CLAUDE_FALLBACK]
+
+
+def pick_latest_claude_models(raw: list[dict]) -> list[dict]:
+    """Newest model per family from /v1/models data, ordered Opus, Sonnet, Haiku."""
+    best: dict[str, dict] = {}
+    for m in raw:
+        mid = m.get("id", "")
+        family = claude_family(mid)
+        if not mid.startswith("claude-") or not family:
+            continue
+        if family not in best or m.get("created_at", "") > best[family].get("created_at", ""):
+            best[family] = m
+    return [
+        claude_model(best[f]["id"], best[f].get("display_name"))
