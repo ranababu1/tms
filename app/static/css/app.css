@@ -73,3 +73,18 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 .header-spacer { flex: 1; }
 .header-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.site-footer { border-top: 1px solid var(--border-default); margin-top: 48px; padding: 24px 0; color: var(--text-faint); font-size: 12px; }
+.site-footer .container { display: flex; gap: 16px; flex-wrap: wrap; justify-content: space-between; }
+main.tool-main { padding: 28px 0 0; }
+
+/* Cards */
+.glass-card {
+  background: linear-gradient(180deg, rgba(24, 26, 36, 0.92), rgba(19, 21, 30, 0.92));
+  border: 1px solid var(--border-default);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+}
+.card-pad { padding: 18px; }
+.stack { display: flex; flex-direction: column; gap: 16px; }
+
