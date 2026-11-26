@@ -598,3 +598,18 @@
       return;
     }
     stopMessages();
+    S.loading = false;
+    S.translatedText = result.translatedText;
+    S.draftText = result.draftText ?? null;
+    S.critiqueText = result.critiqueText ?? null;
+    S.outputTokens = result.usage ? result.usage.outputTokens : null;
+    addUsage(result.usage);
+    render();
+
+    const finalText = await runVerificationLoop(result.translatedText);
+
+    if (withReview && cfg.endpoints.review) {
+      S.phase = "review";
+      S.review = { state: "waiting" }; render();
+      await sleep(L.reviewDelayMs);
+      S.review = { state: "running" }; render();
