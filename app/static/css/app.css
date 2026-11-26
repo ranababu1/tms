@@ -148,3 +148,18 @@ main.tool-main { padding: 28px 0 0; }
   border-radius: 8px; padding: 0 8px; background: var(--surface-input); font-size: 11px;
   color: var(--text-muted); flex-shrink: 0; min-width: 132px;
 }
+.token-meta-slider ul { list-style: none; margin: 0; padding: 0; animation: tokenMeta 7.5s infinite; }
+.token-meta-slider li { height: 22px; line-height: 22px; white-space: nowrap; }
+.token-meta-slider:hover { border-color: var(--accent); color: var(--text-primary); }
+@keyframes tokenMeta {
+  0%, 28% { transform: translateY(0); }
+  33%, 61% { transform: translateY(-22px); }
+  66%, 95% { transform: translateY(-44px); }
+  100% { transform: translateY(0); }
+}
+
+/* Tabs */
+.tabbar {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  border-bottom: 1px solid var(--border-default); padding: 10px 12px;
+}
