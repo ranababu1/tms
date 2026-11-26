@@ -223,3 +223,18 @@ def test_models_fallback_on_provider_error(monkeypatch):
     assert data["fallback"] is True and data["fetchedAt"] is None
     assert [m["id"] for m in data["models"]] == ["claude-opus-5-5", "claude-sonnet-5", "claude-haiku-4-5"]
     assert post("/api/models", {"apiKey": "x"}).status_code == 400
+
+
+def test_models_live_then_cached(monkeypatch):
+    calls = []
+
+    async def limits(api_key, ids):
+        calls.append(ids)
+        return {"gemini-pro-latest": (1000, 200), "gemini-flash-latest": (2000, 300)}
+
+    monkeypatch.setattr(services.gemini, "get_model_limits", limits)
+    first = post("/api/models", {"apiKey": KEY}).json()
+    assert first["fallback"] is False and isinstance(first["fetchedAt"], int)
+    assert [m["id"] for m in first["models"]] == ["gemini-pro-latest", "gemini-flash-latest"]
+    assert first["models"][0]["badge"] == "Pro"
+    second = post("/api/models", {"apiKey": KEY}).json()
