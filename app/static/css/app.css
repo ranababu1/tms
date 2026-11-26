@@ -328,3 +328,9 @@ table.models tr.selected td { background: var(--accent-soft); }
 @keyframes revealRight { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
 .animate-fade-in { animation: fadeIn .35s ease both; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .float-slow, .float-medium, .reveal-up, .reveal-right, .animate-fade-in, .godmode-heartbeat,
+  .token-meta-slider ul, .btn-translate-live::after, .skeleton-shimmer, .loading-text-shimmer,
+  .ai-orb-ring, .ai-orb-core, .ai-progress-fill, .tab.pending { animation: none !important; }
+}
