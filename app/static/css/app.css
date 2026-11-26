@@ -58,3 +58,18 @@ button, input, select, textarea { font: inherit; color: inherit; }
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-default);
 }
+.site-header .container { display: flex; align-items: center; gap: 12px; height: 60px; }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--text-primary); font-weight: 600; }
+.brand:hover { text-decoration: none; }
+.brand-badge {
+  width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center;
+  background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent);
+  font-weight: 700;
+}
+.godmode-heartbeat { animation: heartbeat 2.4s ease-in-out infinite; }
+@keyframes heartbeat {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.45); }
+  50% { box-shadow: 0 0 0 8px rgba(245, 158, 11, 0); }
+}
+.header-spacer { flex: 1; }
+.header-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
