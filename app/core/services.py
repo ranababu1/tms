@@ -283,3 +283,18 @@ async def verify(provider: str, body: dict) -> dict:
     _require(bool(translated.strip()), "Translated text is required.")
     _require(bool(target), "Target language is required.")
     _require(_key_ok(body), _PROVIDER_KEY_MSG[provider])
+    _validate_model(provider, model)
+
+    checklist = pb.get_verification_checklist(target)
+    c = await _complete(
+        provider, body, pb.build_verification_prompt(target),
+        pb.build_verification_user_message(original, translated),
+        temperature=0.2, max_tokens=8192,
+    )
+    if not c.text.strip():
+        if c.finish_reason == "max_tokens":
+            raise ServiceError(500, "Verification ran out of output budget before writing a response. Try again.")
+        raise ServiceError(500, "No verification response was returned by the model.")
+    result = parsing.normalize_verification(parsing.parse_json_tolerant(c.text), checklist)
+    if not result["results"]:
+        raise ServiceError(502, "Verification response could not be parsed. Please try again.")
