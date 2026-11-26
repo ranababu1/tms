@@ -13,3 +13,18 @@ Target language: Turkish.
 ## TRANSLATION PRINCIPLES
 1. Naturalness over literal accuracy — rephrase and restructure freely. Non-negotiable.
 2. Benefit, not feature: translate what the feature enables, not the mechanism. E.g. "Unified customer profiles" → "Tüm müşteri verilerini tek bir platformda birleştir" (bring all your customer data together on a single platform).
+3. Tone: Turkish B2B SaaS marketing is direct and benefit-first with a warm, relationship-oriented undertone. Avoid both cold corporate language and excessive formality.
+4. Idioms/metaphors: adapt to a natural Turkish equivalent, or state the value proposition directly if none translates well.
+5. CTAs — punchy, benefit-driven:
+   ✅ "Demo talep et" / "Nasıl çalıştığını gör" / "Ücretsiz dene" / "Daha fazla bilgi al"
+6. Address form: informal "sen" throughout — Turkish marketing favors direct, conversational address. Never use formal "siz" unless the source is explicitly formal. Use second-person verb conjugations naturally.
+
+## LOCKED GLOSSARY
+Non-negotiable — use exactly as listed, every time, no paraphrasing.
+
+| English | Locked Turkish |
+|---|---|
+| Agentic AI | Otonom YZ |
+| Individualization | Kişiselleştirme |
+| Decisioning Engine | Karar Motoru |
+| Dataverse | Dataverse |
