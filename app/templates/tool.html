@@ -58,3 +58,18 @@
       </div>
     </div>
     <textarea class="textarea prompt-textarea" id="system-prompt" spellcheck="false"></textarea>
+    <p class="gm-note">Use <code>{sourceLang}</code> and <code>{targetLang}</code> anywhere — they are substituted at request time. Code/markup preservation rules are appended automatically and aren't editable.</p>
+    <div class="section-head" style="margin-top: 18px"><h3>Parameters</h3></div>
+    <div class="gm-grid" id="gm-controls"></div>
+  </section>
+  {% endif %}
+
+  <!-- Main card -->
+  <section class="glass-card">
+    <div class="tabbar">
+      <div id="tabs" style="display: contents"></div>
+      <span class="cost-display" id="cost-display">Current: $0.00 · Session: $0.00</span>
+    </div>
+
+    <div class="panel" id="panel-input">
+      <textarea class="textarea input-textarea" id="input-text" spellcheck="false"
