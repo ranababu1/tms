@@ -223,3 +223,18 @@ main.tool-main { padding: 28px 0 0; }
   position: absolute; inset: 28px; border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #fff, var(--accent) 45%, transparent 75%);
   filter: blur(1px); animation: breathe 1.8s ease-in-out infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes breathe { 50% { transform: scale(.82); opacity: .75; } }
+.translation-message-rail { height: 22px; overflow: hidden; }
+.translation-message-text { font-size: 13px; color: var(--text-muted); animation: msgIn .4s ease; }
+@keyframes msgIn { from { transform: translateY(10px); opacity: 0; } to { transform: none; opacity: 1; } }
+.loading-text-shimmer {
+  background: linear-gradient(90deg, var(--text-muted) 0%, #fff 50%, var(--text-muted) 100%);
+  background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: shimmerText 2s linear infinite;
+}
+@keyframes shimmerText { to { background-position: -200% 0; } }
+.ai-progress-track { width: 100%; height: 4px; border-radius: 4px; background: var(--border-default); overflow: hidden; }
+.ai-progress-fill { height: 100%; width: 40%; border-radius: 4px; background: linear-gradient(90deg, var(--accent), var(--accent-warm)); animation: progress 1.6s ease-in-out infinite; }
+@keyframes progress { from { transform: translateX(-100%); } to { transform: translateX(250%); } }
