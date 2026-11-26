@@ -43,3 +43,18 @@ Non-negotiable — use exactly as listed, every time, no paraphrasing.
 
 ### Sentence length & complexity
 - Max 20 words/sentence, natural flowing rhythm. Break 20+ word English sentences into two or three punchier German ones.
+- Crisp copy — avoid over-long, nested subordinate clauses and robotic/choppy phrasing.
+- Restructure heavily branching sentences into active, linear statements.
+
+### Verbs over noun constructions (critical)
+- Hunt down and eliminate nominalizations — "-ung" nouns sound heavy and bureaucratic.
+  ❌ "Die Durchführung einer Analyse des Nutzerverhaltens ermöglicht…"
+  ✅ "Analysieren Sie das Nutzerverhalten und …"
+- Turning "-ung" words back into direct verb phrases is your most powerful tool for sounding human.
+
+### Active voice (mandatory, 100%)
+- 100% active voice — no exceptions. Avoid "wird … von" / "es werden …" passive constructions.
+  ❌ "Die Kampagne wird von der Plattform ausgelöst."
+  ✅ "Die Plattform löst die Kampagne aus." / "Du löst die Kampagne mit einem Klick aus."
+
+### List introductions — vary, benefit-oriented
