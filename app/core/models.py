@@ -133,3 +133,6 @@ def pick_latest_claude_models(raw: list[dict]) -> list[dict]:
             best[family] = m
     return [
         claude_model(best[f]["id"], best[f].get("display_name"))
+        for f in CLAUDE_FAMILY_ORDER
+        if f in best
+    ]
