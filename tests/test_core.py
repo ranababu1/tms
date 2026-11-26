@@ -103,3 +103,18 @@ def test_normalize_review():
 def test_claude_gates():
     assert M.is_allowed_claude_model("claude-sonnet-5")
     assert M.is_allowed_claude_model("CLAUDE-HAIKU-4-5")
+    assert not M.is_allowed_claude_model("claude-instant-1")
+    assert not M.supports_sampling_params("claude-opus-5-5")
+    assert M.supports_sampling_params("claude-haiku-4-5")
+    assert M.supports_effort("claude-sonnet-5") and not M.supports_effort("claude-haiku-4-5")
+
+
+def test_pick_latest_claude_models():
+    raw = [
+        {"id": "claude-sonnet-4-5", "created_at": "2025-09-01T00:00:00Z", "display_name": "Claude Sonnet 4.5"},
+        {"id": "claude-sonnet-5", "created_at": "2026-05-01T00:00:00Z", "display_name": "Claude Sonnet 5"},
+        {"id": "claude-haiku-4-5", "created_at": "2025-10-01T00:00:00Z"},
+        {"id": "claude-opus-5-5", "created_at": "2026-08-01T00:00:00Z", "display_name": "Claude Opus 5.5"},
+        {"id": "other-model", "created_at": "2027-01-01T00:00:00Z"},
+    ]
+    out = M.pick_latest_claude_models(raw)
