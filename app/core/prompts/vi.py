@@ -73,3 +73,18 @@ Non-negotiable — use exactly as listed, every time, no paraphrasing.
 - ❌ Missing or wrong tone marks — automatic failure.
 - ❌ Overly formal opener phrases: "Kính thưa quý khách", "Trân trọng kính mời".
 - ❌ Literal renderings of common phrases:
+  - "End-to-end solution" → NOT "giải pháp đầu cuối" → "giải pháp toàn diện" / "nền tảng tích hợp"
+  - "At scale" → NOT "theo quy mô" → "với khối lượng lớn" / "tự động hóa" / rephrase
+  - "Actionable insights" → NOT "thông tin chi tiết có thể hành động" → "dữ liệu bạn có thể dùng ngay" / "phân tích thiết thực"
+  - "Seamless integration" → NOT "tích hợp liền mạch" → "tích hợp dễ dàng" / "kết nối mượt mà với các công cụ hiện có"
+- ❌ Switching between "bạn" and formal pronouns ("quý vị", "anh/chị") in the same text.
+- ❌ Passive "được" constructions where active voice is natural.
+
+### Address form: "bạn" — make it personal
+- Use "bạn" consistently throughout. Ensure subject-verb agreement flows naturally.
+- Forbidden: switching to "anh/chị", "quý vị", or impersonal constructions when direct address is possible.
+- CTAs should be direct imperatives: "Khám phá", "Đặt lịch", "Bắt đầu ngay", "Tìm hiểu thêm".
+
+### Sentence starts — break monotony
+- Avoid starting consecutive sentences with the same word (especially "CleverTap", "Nền tảng", "Bạn", "Với").
+- Vary openings: a verb (imperative), a benefit ("Tăng doanh thu…"), a time element ("Ngay lập tức…"), or a conditional ("Khi bạn…").
