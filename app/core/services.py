@@ -178,3 +178,18 @@ async def godmode_gemini(body: dict) -> dict:
     _check_languages(source, target)
     _require(_key_ok(body), "A valid Gemini API key is required.")
 
+    seed = body.get("seed")
+    seed_ok = isinstance(seed, (int, float)) and not isinstance(seed, bool) and math.isfinite(seed)
+    level = _s(body, "thinkingLevel").upper()
+    params = {
+        "temperature": _clamp(_num(body, "temperature", 0.7), 0, 1),
+        "top_p": _clamp(_num(body, "topP", 0.95), 0, 1),
+        "top_k": round(_clamp(_num(body, "topK", 40), 1, 100)),
+        "max_output_tokens": int(_clamp(
+            _num(body, "maxOutputTokens", M.GEMINI_DEFAULT_MAX_OUTPUT_TOKENS),
+            1, M.GEMINI_GODMODE_MAX_OUTPUT_CAP,
+        )),
+        "presence_penalty": _clamp(_num(body, "presencePenalty", 0), -2, 2),
+        "frequency_penalty": _clamp(_num(body, "frequencyPenalty", 0), -2, 2),
+        "seed": round(seed) if seed_ok else None,
+    }
