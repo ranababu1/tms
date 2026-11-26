@@ -13,3 +13,18 @@ SAFETY_OFF = [
         types.HarmCategory.HARM_CATEGORY_HARASSMENT,
         types.HarmCategory.HARM_CATEGORY_HATE_SPEECH,
         types.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+        types.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+    )
+]
+
+
+def _client(api_key: str) -> genai.Client:
+    key = api_key.strip()
+    if len(key) < 10:
+        raise ProviderError("A valid Gemini API key is required.", 400)
+    return genai.Client(
+        api_key=key, http_options=types.HttpOptions(timeout=PROVIDER_TIMEOUT_SECONDS * 1000)
+    )
+
+
+def _finish_reason(response) -> str | None:
