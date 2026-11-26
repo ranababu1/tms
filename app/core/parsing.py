@@ -28,3 +28,18 @@ def parse_json_tolerant(raw: str) -> Any | None:
     """Fenced block, then whole text, then the first greedy {...}. None when nothing parses."""
     text = raw.strip()
     fence = _FENCE_RE.search(text)
+    if fence:
+        text = fence.group(1).strip()
+    try:
+        return json.loads(text)
+    except (ValueError, TypeError):
+        pass
+    match = _OBJECT_RE.search(text)
+    if not match:
+        return None
+    try:
+        return json.loads(match.group(0))
+    except (ValueError, TypeError):
+        return None
+
+
