@@ -73,3 +73,18 @@ CLAUDE_FALLBACK = [
     ("claude-opus-5-5", "Claude Opus 5.5"),
     ("claude-sonnet-5", "Claude Sonnet 5"),
     ("claude-haiku-4-5", "Claude Haiku 4.5"),
+]
+
+_ALLOWED_RE = re.compile(r"^claude-(opus|sonnet|haiku)-\d", re.IGNORECASE)
+_GEN5_RE = re.compile(r"^claude-(opus|sonnet)-5", re.IGNORECASE)
+_FAMILY_RE = re.compile(r"opus|sonnet|haiku", re.IGNORECASE)
+
+
+def is_allowed_claude_model(model_id: str) -> bool:
+    return bool(_ALLOWED_RE.match(model_id or ""))
+
+
+def supports_sampling_params(model_id: str) -> bool:
+    """Opus/Sonnet 5.x reject temperature/top_k."""
+    return not _GEN5_RE.match(model_id or "")
+
