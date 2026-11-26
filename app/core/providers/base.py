@@ -28,3 +28,10 @@ class Completion:
     finish_reason: str | None = None
 
 
+class ProviderError(Exception):
+    """A provider call failed. `status` is the provider HTTP status when known."""
+
+    def __init__(self, message: str, status: int | None = None):
+        super().__init__(message)
+        self.message = message
+        self.status = status
