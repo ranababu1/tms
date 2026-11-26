@@ -28,3 +28,18 @@ def test_named_source_sentence():
     prompt = pb.build_translation_system_prompt("en", "de")
     assert "The source language is English." in prompt
 
+
+def test_fallback_prompt_overrides_target():
+    prompt = pb.build_translation_system_prompt("en", "es")
+    assert prompt.startswith("## TARGET LANGUAGE OVERRIDE (read first)\nThe target language is Spanish, NOT German.")
+    assert "Output ONLY Spanish.\n\nYou are a senior German copywriter" in prompt
+
+
+def test_god_template_seed():
+    assert pb.get_prompt_template_for_lang("vi").startswith("You are a senior Vietnamese copywriter")
+    assert "REQUIRED OUTPUT FORMAT" not in pb.get_prompt_template_for_lang("de")
+    assert pb.get_prompt_template_for_lang("ja").startswith("No predefined prompt for Japanese yet.")
+
+
+def test_godmode_interpolation_is_global_and_appends_rules():
+    out = pb.build_godmode_system_prompt("{sourceLang}->{targetLang} {sourceLang}", "auto", "fr")
