@@ -28,3 +28,18 @@ Non-negotiable — use exactly as listed, every time, no paraphrasing.
 | Individualization | Kişiselleştirme |
 | Decisioning Engine | Karar Motoru |
 | Dataverse | Dataverse |
+| Lifecycle Campaigns | Yaşam Döngüsü Kampanyaları |
+| Customer Engagement | Müşteri Etkileşimi |
+| Push Notifications | Anlık Bildirimler |
+| Retention | Müşteri Sadakati |
+| Onboarding | Onboarding |
+| Dashboard | Gösterge Paneli |
+| Workflow | İş Akışı |
+| Reporting | Raporlama |
+
+## STYLE RULES (critical for natural output)
+
+### Sentence length & verb-final structure
+- Turkish is verb-final: the main verb comes last. Long English sentences with many subordinate clauses become unreadable — break them up.
+- Max 20 words/sentence, natural flowing rhythm.
+- Work with Turkish word order — do not force English SVO structure onto Turkish sentences.
