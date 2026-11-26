@@ -58,3 +58,18 @@ def test_verification_prompt_note_only_for_fallback():
 def test_fix_prompt():
     checks = [{"description": "No passive voice?", "note": "Sentence 2 is passive"},
               {"description": "CTA natural?", "note": ""}]
+    out = pb.build_fix_prompt("de", checks)
+    assert out.startswith(de.PROMPT_TEMPLATE)  # {sourceLang} left unreplaced
+    assert "1. No passive voice? — Reviewer note: Sentence 2 is passive\n2. CTA natural?\n" in out
+    fallback = pb.build_fix_prompt("pt", checks)
+    assert fallback.startswith("## TARGET LANGUAGE OVERRIDE")
+    assert "{sourceLang}" not in fallback
+
+
+# ---- parsing --------------------------------------------------------------
+
+def test_parse_tags_full_and_missing_final():
+    raw = "<DRAFT> d </draft>\n<critique>\n1. PASS\n</critique><final>\n f \n</final>"
+    assert parsing.parse_tags(raw) == {"translatedText": "f", "draftText": "d", "critiqueText": "1. PASS"}
+    raw2 = "  just text  "
+    assert parsing.parse_tags(raw2) == {"translatedText": raw2, "draftText": None, "critiqueText": None}
