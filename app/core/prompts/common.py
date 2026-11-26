@@ -58,3 +58,18 @@ Evaluate for:
 - Tone and register match (energetic copy stays energetic, formal stays formal, casual stays casual)
 - Cultural appropriateness for {targetLangName}-speaking audiences
 - Code/markup preservation (HTML tags, template variables, URLs must be completely unchanged)
+
+Return ONLY valid JSON with this exact schema:
+{
+  "hasIssues": boolean,
+  "issues": string[],
+  "correctedTranslation": string
+}
+
+Rules:
+- issues: brief, specific descriptions of each problem found
+- correctedTranslation: the full corrected translation if hasIssues is true, otherwise empty string ""
+- Do not include any text outside the JSON object"""
+
+REVIEW_USER = (
+    "Source text:\n{originalText}\n\nTarget language: {targetLangName}\n\n"
