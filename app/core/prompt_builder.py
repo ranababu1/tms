@@ -73,3 +73,18 @@ def build_fix_prompt(lang: str, failing_checks: list[dict]) -> str:
         base = _fallback_override(lang) + TEMPLATES["de"].PROMPT_TEMPLATE.replace("{sourceLang}", "")
     lines = []
     for i, check in enumerate(failing_checks):
+        line = f"{i + 1}. {check.get('description', '')}"
+        note = (check.get("note") or "").strip()
+        if note:
+            line += f" — Reviewer note: {note}"
+        lines.append(line)
+    return base + common.FIX_REQUEST.replace("{issues}", "\n".join(lines))
+
+
+def build_fix_user_message(original: str, current: str) -> str:
+    return f"ORIGINAL SOURCE:\n{original}\n\nCURRENT TRANSLATION (to fix):\n{current}"
+
+
+def build_godmode_system_prompt(system_prompt: str, source_lang: str, target_lang: str) -> str:
+    src_name = "auto-detected" if source_lang == "auto" else language_name(source_lang)
+    prompt = system_prompt.replace("{sourceLang}", src_name)
