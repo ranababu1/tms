@@ -103,3 +103,18 @@
     S.currentCost += cost;
     S.sessionCost += cost;
     const tag = isGod ? "[God Mode]" : isClaude ? "[Claude]" : "[Gemini]";
+    console.groupCollapsed(`${tag} token usage`);
+    console.log("model:", S.model);
+    console.log("input:", usage.inputTokens, "output:", usage.outputTokens, "total:", usage.totalTokens);
+    console.log("cost (USD):", cost.toFixed(6));
+    console.groupEnd();
+    renderCost();
+  }
+
+  // ---------- God Mode params ----------
+  function godDefaults(resetAll) {
+    if (isClaude) {
+      return {
+        temperature: 0.7, topK: 40, effort: "high",
+        maxTokens: Math.min(L.claudeDefaultMaxTokens, godMaxCap()),
+      };
