@@ -178,3 +178,18 @@ def test_verify_success_and_parse_failure(monkeypatch):
     monkeypatch.setattr(services.claude, "create_message", fake(raises=ProviderError("busy", 529)))
     assert post("/api/verify-translation-claude", VERIFY_BODY).status_code == 529
 
+
+def test_verify_validation():
+    r = post("/api/verify-translation", {**VERIFY_BODY, "apiKey": ""})
+    assert r.json()["error"] == "A valid Gemini API key is required."
+    r = post("/api/verify-translation-claude", {**VERIFY_BODY, "model": "nope"})
+    assert r.json()["error"] == "Invalid model selection."
+
+
+def test_fix(monkeypatch):
+    body = {"originalText": "o", "currentTranslation": "c", "targetLang": "tr", "model": "m", "apiKey": KEY}
+    r = post("/api/fix-translation", {**body, "failingChecks": []})
+    assert r.status_code == 400 and r.json()["error"] == "At least one failing check is required."
+    calls = []
+    monkeypatch.setattr(services.gemini, "generate", fake("  fixed  ", calls=calls))
+    r = post("/api/fix-translation", {**body, "failingChecks": [{"description": "d", "note": "n"}]})
