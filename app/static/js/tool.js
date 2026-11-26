@@ -283,3 +283,18 @@
     $("btn-reset-prompt").addEventListener("click", () => { $("system-prompt").value = templateFor(S.target); });
     $("btn-reset-all").addEventListener("click", () => {
       $("system-prompt").value = templateFor(S.target);
+      S.god = godDefaults(true);
+      renderGodControls();
+    });
+  }
+
+  // ---------- input panel ----------
+  const input = $("input-text");
+  const btnTranslate = $("btn-translate");
+  const btnReview = $("btn-review");
+
+  function autoResize() {
+    input.style.height = "auto";
+    input.style.height = clamp(input.scrollHeight + 2, 360, 500) + "px";
+  }
+  function renderInputState() {
