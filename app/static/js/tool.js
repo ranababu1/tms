@@ -478,3 +478,18 @@
     let view;
     if (S.panel === "output") view = outputView();
     else if (S.panel === "draft") view = el("pre", { class: "output-block" }, el("code", {}, S.draftText || ""));
+    else if (S.panel === "critique") view = el("pre", { class: "output-block" }, el("code", {}, S.critiqueText || ""));
+    else if (S.panel === "pending") view = pendingView();
+    else if (S.panel.startsWith("attempt-")) view = attemptView(Number(S.panel.slice(8)));
+    else view = outputView();
+    dyn.replaceChildren(view);
+  }
+
+  function render() {
+    if (S.panel === "pending" && !S.pending) S.panel = "output";
+    renderTabs();
+    renderPanel();
+    renderInputState();
+    renderCost();
+  }
+
