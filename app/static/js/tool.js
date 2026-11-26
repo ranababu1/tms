@@ -223,3 +223,18 @@
     return [
       { key: "temperature", label: "Creativity (temperature)", min: 0, max: 1, step: 0.05 },
       { key: "topP", label: "Top-p", min: 0.05, max: 1, step: 0.05 },
+      { key: "topK", label: "Top-k", min: 1, max: 100, step: 1 },
+      { key: "maxTokens", label: "Max output tokens", min: 1, max: godMaxCap(), step: 1, number: true },
+      { key: "presencePenalty", label: "Presence penalty", min: -2, max: 2, step: 0.1 },
+      { key: "frequencyPenalty", label: "Frequency penalty", min: -2, max: 2, step: 0.1 },
+      { key: "seed", label: "Seed", seed: true },
+      { key: "thinkingLevel", label: "Thinking level", select: L.thinkingLevels },
+    ];
+  }
+
+  function fmtParam(spec, v) {
+    if (spec.number) return full.format(v);
+    return spec.step < 1 ? Number(v).toFixed(2) : String(v);
+  }
+
+  function renderGodControls() {
