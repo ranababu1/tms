@@ -58,3 +58,18 @@ def build_verification_prompt(lang: str) -> str:
     return (
         common.VERIFY_PROMPT.replace("{LangName}", name)
         .replace("{checklistText}", checklist_text)
+        .replace("{checklistNote}", note)
+    )
+
+
+def build_verification_user_message(original: str, translated: str) -> str:
+    return f"ORIGINAL:\n{original}\n\nFINAL TRANSLATION:\n{translated}"
+
+
+def build_fix_prompt(lang: str, failing_checks: list[dict]) -> str:
+    if lang in TEMPLATES:
+        base = TEMPLATES[lang].PROMPT_TEMPLATE
+    else:
+        base = _fallback_override(lang) + TEMPLATES["de"].PROMPT_TEMPLATE.replace("{sourceLang}", "")
+    lines = []
+    for i, check in enumerate(failing_checks):
