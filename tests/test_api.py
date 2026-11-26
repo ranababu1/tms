@@ -73,3 +73,18 @@ def test_claude_translate_validation():
     r = post("/api/translate-claude", {**base, "apiKey": KEY, "model": "gpt-4"})
     assert r.json()["error"] == "Invalid model selection."
     r = post("/api/translate-claude", {**base, "apiKey": "short", "model": "claude-sonnet-5"})
+    assert r.json()["error"] == "Invalid API key format."
+
+
+# ---- translate ------------------------------------------------------------
+
+def test_gemini_translate_success(monkeypatch):
+    calls = []
+    monkeypatch.setattr(services.gemini, "generate", fake("<draft>D</draft><critique>C</critique><final> F </final>", calls=calls))
+    r = post("/api/translate", {"text": "Hello", "sourceLang": "auto", "targetLang": "tr",
+                                "model": "gemini-flash-latest", "apiKey": KEY})
+    assert r.status_code == 200
+    data = r.json()
+    assert data["translatedText"] == "F" and data["draftText"] == "D" and data["critiqueText"] == "C"
+    assert data["usage"] == {"inputTokens": 10, "outputTokens": 5, "totalTokens": 15}
+    kw = calls[0]["kwargs"]
