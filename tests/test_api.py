@@ -88,3 +88,18 @@ def test_gemini_translate_success(monkeypatch):
     assert data["translatedText"] == "F" and data["draftText"] == "D" and data["critiqueText"] == "C"
     assert data["usage"] == {"inputTokens": 10, "outputTokens": 5, "totalTokens": 15}
     kw = calls[0]["kwargs"]
+    assert kw["temperature"] == 0.7 and kw["top_p"] == 0.95 and kw["max_output_tokens"] == 8192
+    assert kw["disable_safety"] is True
+
+
+def test_gemini_translate_safety_and_empty(monkeypatch):
+    body = {"text": "x", "targetLang": "de", "model": "m", "apiKey": KEY}
+    monkeypatch.setattr(services.gemini, "generate", fake("", finish="safety"))
+    r = post("/api/translate", body)
+    assert r.status_code == 422 and r.json()["error"] == "Content was blocked by safety filters. Try rephrasing."
+    monkeypatch.setattr(services.gemini, "generate", fake("   "))
+    assert post("/api/translate", body).status_code == 500
+    monkeypatch.setattr(services.gemini, "generate", fake(raises=ProviderError("quota exceeded", 429)))
+    r = post("/api/translate", body)
+    assert r.status_code == 500 and r.json()["error"] == "quota exceeded"
+
