@@ -13,3 +13,18 @@ The backend is Python (FastAPI). The frontend is plain HTML, CSS and JavaScript 
 
 ## Run
 
+```bash
+python -m venv .venv
+# Windows: .venv\Scripts\activate    macOS/Linux: source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8000 --timeout-keep-alive 620
+```
+
+Open http://127.0.0.1:8000 and click **Set API Key**. No server environment variables are needed.
+
+## Privacy
+
+Your key is stored in this tab's `sessionStorage`. It is sent in the body of each request to this app's `/api/*` routes, which forward it to the provider. The server never stores or logs it.
+
+## Tests
+
