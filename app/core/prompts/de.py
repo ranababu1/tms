@@ -133,3 +133,12 @@ Work through each check below. Mark each PASS or FAIL with a one-line note.
 9. Grammar, spelling, capitalization (all nouns capitalized), and punctuation fully correct?
 10. Tone matches the source's intent — confident and precise, neither stiff nor overly casual?
 11. No redundant, filler, or repeated phrasing — every sentence earns its place?
+12. CTAs are punchy, benefit-driven, and natural — not literal English translations?
+13. No leftover untranslated English text (except intentional brand/product names)?
+14. No wrong compound-word spacing/hyphenation or incorrect noun capitalization?
+15. Persuasive intent and meaning fully preserved — nothing lost, added, or softened from the source?
+</critique>
+
+<final>
+Rewrite the translation, correcting every FAIL item from your critique. This is the only section shown to the user — make it perfect.
+</final>"""
