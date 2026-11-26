@@ -73,3 +73,18 @@
 
     <div class="panel" id="panel-input">
       <textarea class="textarea input-textarea" id="input-text" spellcheck="false"
+        placeholder="{{ 'Add your content here and translate...' if god else 'add your content here and translate..' }}"></textarea>
+      <div class="counter-row">
+        <span id="input-counter">0 chars | ~0 tokens</span>
+        <span class="faint" id="key-hint">Set API key from top nav to start translating</span>
+      </div>
+      <div class="action-row">
+        {% if cfg.endpoints.review %}
+        <button class="btn" id="btn-review" type="button" disabled>Translate and Review</button>
+        {% endif %}
+        <button class="btn btn-translate" id="btn-translate" type="button" disabled>
+          <span class="label">Translate</span> <span class="kbd">⌘↵</span>
+        </button>
+      </div>
+    </div>
+
