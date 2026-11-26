@@ -253,3 +253,18 @@ _PROVIDER_KEY_MSG = {
 def _validate_model(provider: str, model: str) -> None:
     if provider == "gemini":
         _require(bool(model), "Model selection is required.")
+    else:
+        _require(M.is_allowed_claude_model(model), "Invalid model selection.")
+
+
+async def _complete(provider: str, body: dict, system: str, user: str,
+                    *, temperature: float, max_tokens: int) -> Completion:
+    model = _s(body, "model")
+    try:
+        if provider == "gemini":
+            return await gemini.generate(
+                _s(body, "apiKey"), model, system, user,
+                temperature=temperature, top_p=0.95, max_output_tokens=max_tokens,
+            )
+        return await claude.create_message(
+            _s(body, "apiKey"), model, system, user, max_tokens,
