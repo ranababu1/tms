@@ -118,3 +118,18 @@ def test_claude_translate_params_and_error_mapping(monkeypatch):
     assert calls[0]["args"][4] == 64000 and calls[0]["kwargs"] == {}
 
     for status, fragment in [(401, "Invalid API key"), (403, "Access denied"), (429, "Rate limit"), (404, "not found")]:
+        monkeypatch.setattr(services.claude, "create_message", fake(raises=ProviderError("x", status)))
+        r = post("/api/translate-claude", body)
+        assert r.status_code == status and fragment in r.json()["error"]
+    monkeypatch.setattr(services.claude, "create_message", fake(raises=ProviderError("overloaded", 529)))
+    r = post("/api/translate-claude", body)
+    assert r.status_code == 500 and r.json()["error"] == "overloaded"
+
+
+# ---- God Mode -------------------------------------------------------------
+
+def test_gemini_godmode_clamps(monkeypatch):
+    calls = []
+    monkeypatch.setattr(services.gemini, "generate", fake(" out ", calls=calls))
+    r = post("/api/godmode", {
+        "text": "x", "sourceLang": "en", "targetLang": "de", "model": "m", "apiKey": KEY,
