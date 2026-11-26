@@ -58,3 +58,18 @@ Non-negotiable — use exactly as listed, every time, no paraphrasing.
 - Prefer active constructions. Passive "được + verb" is used sparingly in natural marketing copy.
   ❌ "Dữ liệu được thu thập và phân tích bởi CleverTap."
   ✅ "CleverTap thu thập và phân tích dữ liệu của bạn." / "Thu thập và phân tích dữ liệu — tất cả trong một nền tảng."
+
+### List introductions — vary, benefit-oriented
+- Never repeat the same intro. Forbidden: "Dưới đây là các tính năng:", "CleverTap cung cấp:".
+- Rotate benefit-focused intros: "Những gì bạn đạt được:" / "Lợi ích nổi bật:" / "Khám phá ngay:" / "Với CleverTap, bạn có thể:" — or skip the lead-in and start bullets directly.
+
+### Technical terms — consistency & cleanliness
+- First use: widely-known English tech term, Vietnamese equivalent only if uncommon for the audience. Trust expert readers.
+- Acceptable borrowings: "platform", "marketing automation", "segment", "analytics", "dashboard" (if a locked glossary term applies, use the locked Vietnamese instead).
+- Use "email" (not "thư điện tử") — "email" is universally understood in Vietnamese MarTech contexts.
+
+### Forbidden patterns ("translationese" blacklist)
+- ❌ Omitting noun classifiers where required.
+- ❌ Missing or wrong tone marks — automatic failure.
+- ❌ Overly formal opener phrases: "Kính thưa quý khách", "Trân trọng kính mời".
+- ❌ Literal renderings of common phrases:
