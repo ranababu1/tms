@@ -28,3 +28,18 @@ VERIFY_PROMPT = """You are an independent quality reviewer checking a {LangName}
 You will receive the ORIGINAL source text and the FINAL translated text.
 
 Grade the FINAL text against every item below. Mark each PASS only if it is genuinely satisfied — do not give the benefit of the doubt.
+
+{checklistText}
+{checklistNote}
+Respond with ONLY valid JSON, no markdown fences, no commentary, in this exact shape:
+{"results":[{"item":1,"pass":true,"note":"one short sentence why"}, ...],"allPassed":true}
+
+Include one entry per checklist item above, in order. "allPassed" must be true only if every item passed."""
+
+FIX_REQUEST = """
+
+## FIX REQUEST
+You will be given the ORIGINAL source text and a CURRENT TRANSLATION of it. An independent reviewer graded the current translation and found it fails the following checks:
+
+{issues}
+
