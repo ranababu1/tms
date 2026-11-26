@@ -73,3 +73,13 @@ REVIEW_PARSE_FAILED = {
 
 def normalize_review(parsed: Any) -> dict:
     if not isinstance(parsed, dict):
+        return dict(REVIEW_PARSE_FAILED)
+    issues = parsed.get("issues")
+    issues = [i for i in issues if isinstance(i, str)][:8] if isinstance(issues, list) else []
+    corrected = parsed.get("correctedTranslation")
+    corrected = corrected if isinstance(corrected, str) and corrected.strip() else None
+    return {
+        "hasIssues": bool(parsed.get("hasIssues")),
+        "issues": issues,
+        "correctedTranslation": corrected,
+    }
