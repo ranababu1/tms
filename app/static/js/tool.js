@@ -313,3 +313,18 @@
     swapBtn.disabled = S.source === "auto" || S.busy;
   }
   input.addEventListener("input", () => { autoResize(); renderInputState(); });
+  btnTranslate.addEventListener("click", () => handleTranslate(false));
+  if (btnReview) btnReview.addEventListener("click", () => handleTranslate(true));
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && (e.ctrlKey || e.metaKey) && !keyModalOpen() && !S.busy) {
+      e.preventDefault();
+      if (input.value.trim()) handleTranslate(false);
+    }
+  });
+
+  // ---------- tabs ----------
+  function tabButton(id, ...label) {
+    return el("button", {
+      class: "tab" + (S.panel === id ? " active" : ""),
+      type: "button",
+      onclick: () => { S.panel = id; render(); },
