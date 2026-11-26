@@ -298,3 +298,18 @@ async def verify(provider: str, body: dict) -> dict:
     result = parsing.normalize_verification(parsing.parse_json_tolerant(c.text), checklist)
     if not result["results"]:
         raise ServiceError(502, "Verification response could not be parsed. Please try again.")
+    return {"checklist": checklist, **result, "usage": c.usage.as_dict()}
+
+
+async def fix(provider: str, body: dict) -> dict:
+    original, current = _s(body, "originalText"), _s(body, "currentTranslation")
+    target, model = _s(body, "targetLang"), _s(body, "model")
+    _require(bool(original.strip()), "Original text is required.")
+    _require(bool(current.strip()), "Current translation is required.")
+    _require(bool(target), "Target language is required.")
+    _require(_key_ok(body), _PROVIDER_KEY_MSG[provider])
+    _validate_model(provider, model)
+    raw_checks = body.get("failingChecks")
+    checks = [
+        {"description": str(c.get("description", "")), "note": str(c.get("note") or "")}
+        for c in (raw_checks if isinstance(raw_checks, list) else [])
