@@ -163,3 +163,18 @@ def test_claude_godmode_gates(monkeypatch):
 # ---- verify / fix / review ------------------------------------------------
 
 VERIFY_BODY = {"originalText": "o", "translatedText": "t", "targetLang": "de", "model": "claude-haiku-4-5", "apiKey": KEY}
+
+
+def test_verify_success_and_parse_failure(monkeypatch):
+    monkeypatch.setattr(services.claude, "create_message",
+                        fake('```json\n{"results":[{"item":1,"pass":true,"note":"ok"}],"allPassed":false}\n```'))
+    data = post("/api/verify-translation-claude", VERIFY_BODY).json()
+    assert len(data["checklist"]) == 15 and data["results"][0]["pass"] is True and data["allPassed"] is False
+    monkeypatch.setattr(services.claude, "create_message", fake("I cannot comply"))
+    r = post("/api/verify-translation-claude", VERIFY_BODY)
+    assert r.status_code == 502 and r.json()["error"] == "Verification response could not be parsed. Please try again."
+    monkeypatch.setattr(services.claude, "create_message", fake("", finish="max_tokens"))
+    assert "ran out of output budget" in post("/api/verify-translation-claude", VERIFY_BODY).json()["error"]
+    monkeypatch.setattr(services.claude, "create_message", fake(raises=ProviderError("busy", 529)))
+    assert post("/api/verify-translation-claude", VERIFY_BODY).status_code == 529
+
