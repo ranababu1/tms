@@ -58,3 +58,18 @@ def normalize_verification(parsed: Any, checklist: list[str]) -> dict:
         })
     model_flag = parsed.get("allPassed")
     if isinstance(model_flag, bool):
+        all_passed = model_flag
+    else:
+        all_passed = len(results) > 0 and all(r["pass"] for r in results)
+    return {"results": results, "allPassed": all_passed}
+
+
+REVIEW_PARSE_FAILED = {
+    "hasIssues": False,
+    "issues": ["Review parsing failed. Raw review returned."],
+    "correctedTranslation": None,
+}
+
+
+def normalize_review(parsed: Any) -> dict:
+    if not isinstance(parsed, dict):
