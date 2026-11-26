@@ -58,3 +58,18 @@
     for (let i = 0; i < particles.length; i++) {
       const a = particles[i];
       for (let j = i + 1; j < particles.length; j++) {
+        const b = particles[j];
+        const d = Math.hypot(a.x - b.x, a.y - b.y);
+        if (d < LINK_DISTANCE) {
+          ctx.strokeStyle = `hsla(${(a.hue + b.hue) / 2}, 90%, 65%, ${0.16 * (1 - d / LINK_DISTANCE)})`;
+          ctx.lineWidth = 0.6;
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+      }
+    }
+
+    for (const p of particles) {
+      const twinkle = 0.6 + 0.4 * Math.sin(t / 700 + p.phase);
+      const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 6);
+      glow.addColorStop(0, `hsla(${p.hue}, 95%, 70%, ${0.35 * twinkle})`);
+      glow.addColorStop(1, `hsla(${p.hue}, 95%, 70%, 0)`);
