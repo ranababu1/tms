@@ -28,3 +28,18 @@ def gemini_pricing(model_id: str) -> dict:
     key = "gemini-pro-latest" if "pro" in model_id.lower() else "gemini-flash-latest"
     return GEMINI_PRICING[key]
 
+
+def gemini_model(alias: dict, input_limit: int, output_limit: int) -> dict:
+    pricing = gemini_pricing(alias["id"])
+    return {
+        "id": alias["id"],
+        "label": alias["label"],
+        "badge": "Pro" if alias["isPro"] else None,
+        "isPro": alias["isPro"],
+        "inputTokenLimit": input_limit,
+        "outputTokenLimit": output_limit,
+        "pricing": pricing_summary(pricing),
+    }
+
+
+def gemini_fallback_models() -> list[dict]:
