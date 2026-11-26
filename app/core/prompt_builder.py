@@ -28,3 +28,18 @@ def _dedicated_system_prompt(lang: str, source_lang: str) -> str:
 
 
 def build_translation_system_prompt(source_lang: str, target_lang: str) -> str:
+    """Simple-mode prompt: dedicated de/tr/vi, otherwise override + German prompt."""
+    if target_lang in TEMPLATES:
+        return _dedicated_system_prompt(target_lang, source_lang)
+    return _fallback_override(target_lang) + _dedicated_system_prompt("de", source_lang)
+
+
+def get_prompt_template_for_lang(lang: str) -> str:
+    """God Mode seed text (no output-format block)."""
+    if lang in TEMPLATES:
+        return TEMPLATES[lang].PROMPT_TEMPLATE
+    return common.GODMODE_PLACEHOLDER.replace("{LangName}", language_name(lang))
+
+
+def get_verification_checklist(lang: str) -> list[str]:
+    """Numbered critique items — the single source of truth for verify and fix."""
