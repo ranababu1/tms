@@ -118,3 +118,18 @@
     <label class="checkbox-row">
       <input type="checkbox" id="verify-checkbox">
       <span>
+        <span>Run an independent accuracy verification pass after each translation</span><br>
+        <span class="faint" style="font-size: 12px">Makes one extra model call per translation to re-check the result. More accurate, but costs more. Leave off for the faster, cheaper default.</span>
+      </span>
+    </label>
+    {% endif %}
+    <div class="modal-actions">
+      <button class="btn" id="key-cancel" type="button">Cancel</button>
+      <button class="btn btn-translate" id="key-save" type="button">{{ cfg.keyModal.saveLabel }}</button>
+    </div>
+  </div>
+</div>
+
+<!-- Model info modal -->
+<div class="modal-backdrop hidden" id="model-modal" role="dialog" aria-modal="true" aria-labelledby="model-modal-title">
+  <div class="glass-card modal wide">
