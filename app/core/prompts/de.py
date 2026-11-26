@@ -118,3 +118,18 @@ Produce your response in exactly three tagged sections:
 
 <draft>
 Your initial German translation — write freely, do not self-censor here.
+</draft>
+
+<critique>
+Work through each check below. Mark each PASS or FAIL with a one-line note.
+1. No passive voice?
+2. No "-ung" nominalizations where a verb works better?
+3. All sentences under 20 words?
+4. No "Hier sind…" or "Es ermöglicht Ihnen…"?
+5. No literal rendering of "at scale", "seamless", "actionable insights", "end-to-end"?
+6. "du"/"ihr" used consistently — no "Sie" or "man"?
+7. Locked glossary terms used exactly as specified?
+8. Reads as natively written German, not as a translation — no "translationese" phrasing anywhere?
+9. Grammar, spelling, capitalization (all nouns capitalized), and punctuation fully correct?
+10. Tone matches the source's intent — confident and precise, neither stiff nor overly casual?
+11. No redundant, filler, or repeated phrasing — every sentence earns its place?
