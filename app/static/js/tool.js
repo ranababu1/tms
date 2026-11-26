@@ -418,3 +418,18 @@
         el("button", { class: "btn btn-sm", type: "button", onclick: () => handleTranslate(S.lastWithReview) }, "Try again"));
     }
     if (S.translatedText == null) {
+      return el("pre", { class: "output-block empty" }, "Translation will appear here");
+    }
+    const n = S.translatedText.length;
+    const tokens = S.outputTokens == null ? "—" : full.format(S.outputTokens);
+    const status = S.pending
+      ? el("span", { class: "loading-text-shimmer" },
+          S.pending.kind === "verify" ? "Running verification..." : "Fixing failing checks...")
+      : null;
+    return el("div", { class: "animate-fade-in" },
+      el("div", { class: "output-toolbar" },
+        el("span", {}, `${full.format(n)} chars | ${tokens} tokens | ${usdSmart(S.currentCost)}`),
+        status,
+        el("span", { class: "header-actions" },
+          el("button", { class: "btn btn-sm", type: "button", onclick: () => copyText(S.translatedText) },
+            S.copied ? "Copied!" : "Copy"),
