@@ -343,3 +343,18 @@ async def review_gemini(body: dict) -> dict:
     target_name = language_name(target)
     system, user = pb.build_review_prompts(original, translated, target_name)
     try:
+        c = await gemini.generate(
+            _s(body, "apiKey"), model, system, user,
+            temperature=0.3, top_p=0.95, max_output_tokens=4096,
+        )
+    except ProviderError as exc:
+        raise ServiceError(500, exc.message) from None
+    result = parsing.normalize_review(parsing.parse_json_tolerant(c.text))
+    # Extra field (not in the original contract) so the UI can count review cost.
+    return {**result, "usage": c.usage.as_dict()}
+
+
+# ---- model catalogs -------------------------------------------------------
+
+async def _fetch_gemini_catalog(api_key: str) -> list[dict]:
+    limits = await gemini.get_model_limits(api_key, [a["id"] for a in M.GEMINI_ALIASES])
