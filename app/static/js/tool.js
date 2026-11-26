@@ -643,3 +643,18 @@
   const keyToggle = $("key-toggle");
   const verifyBox = $("verify-checkbox");
   const keyModalOpen = () => !keyModal.classList.contains("hidden");
+
+  function openKeyModal() {
+    keyInput.value = S.apiKey;
+    keyInput.type = "password";
+    keyToggle.textContent = "Show";
+    if (verifyBox) verifyBox.checked = S.verifyEnabled;
+    keyModal.classList.remove("hidden");
+    keyInput.focus();
+  }
+  function closeKeyModal() { keyModal.classList.add("hidden"); }
+  function saveKey() {
+    S.apiKey = keyInput.value.trim();
+    if (S.apiKey) store.set(cfg.storage.key, S.apiKey); else store.del(cfg.storage.key);
+    if (verifyBox) {
+      S.verifyEnabled = verifyBox.checked;
