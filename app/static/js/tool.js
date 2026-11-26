@@ -208,3 +208,18 @@
 
   // ---------- God Mode controls ----------
   function godControlSpecs() {
+    const claudeSamplingNote = "Not supported by Opus/Sonnet 5 models — not sent.";
+    if (isClaude) {
+      return [
+        { key: "temperature", label: "Temperature", min: 0, max: 1, step: 0.05,
+          disabled: !supportsSampling(), note: !supportsSampling() && claudeSamplingNote },
+        { key: "topK", label: "Top-k", min: 1, max: 500, step: 1,
+          disabled: !supportsSampling(), note: !supportsSampling() && claudeSamplingNote },
+        { key: "maxTokens", label: "Max output tokens", min: 1, max: godMaxCap(), step: 1, number: true },
+        { key: "effort", label: "Effort", select: L.effortLevels,
+          disabled: !supportsEffort(), note: !supportsEffort() && "Effort isn't supported by this model — not sent." },
+      ];
+    }
+    return [
+      { key: "temperature", label: "Creativity (temperature)", min: 0, max: 1, step: 0.05 },
+      { key: "topP", label: "Top-p", min: 0.05, max: 1, step: 0.05 },
