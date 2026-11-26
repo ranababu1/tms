@@ -88,3 +88,18 @@ def page_config(provider: str, mode: str) -> dict:
             "placeholder": prov["keyPlaceholder"],
             "saveLabel": "Save API Key" if (provider, mode) == ("claude", "god") else "Save",
             "showVerify": mode == "simple",
+            "showNote": (provider, mode) != ("claude", "god"),
+        },
+        "keyLink": prov["keyLink"],
+        "noKeyError": prov["noKeyError"],
+        "crossLink": {"href": PAGES[(other, mode)]["path"], "label": PROVIDERS[other]["name"]},
+        "modeLink": {"href": PAGES[(provider, "god" if mode == "simple" else "simple")]["path"],
+                     "label": "God Mode" if mode == "simple" else "Simple mode"},
+        "defaultModel": page["defaultModel"],
+        "fallbackModels": prov["fallbackModels"](),
+        "languages": UI_LANGUAGES,
+        "languagesWithPrompt": list(LANGUAGES_WITH_PROMPT),
+        "promptTemplates": (
+            {l["code"]: get_prompt_template_for_lang(l["code"]) for l in UI_LANGUAGES if l["code"] != "auto"}
+            if mode == "god" else None
+        ),
