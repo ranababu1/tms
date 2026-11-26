@@ -163,3 +163,18 @@ main.tool-main { padding: 28px 0 0; }
   display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
   border-bottom: 1px solid var(--border-default); padding: 10px 12px;
 }
+.tab {
+  border: 1px solid transparent; background: transparent; color: var(--text-muted);
+  padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 13px;
+}
+.tab:hover { color: var(--text-primary); }
+.tab.active { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+.tab .ok { color: var(--ok); }
+.tab .bad { color: var(--warn); }
+.tab.pending { animation: pulse 1.2s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .45; } }
+.cost-display { margin-left: auto; font-size: 12px; color: var(--text-faint); }
+.panel { padding: 16px; }
+
+/* Input panel */
+.input-textarea { min-height: 360px; max-height: 500px; border-radius: 12px; }
