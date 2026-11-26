@@ -253,3 +253,18 @@
           oninput: (e) => { S.god.seed = e.target.value; } });
       } else {
         const slider = el("input", { class: "gm-slider", type: "range", min: spec.min, max: spec.max,
+          step: spec.step, value: v, disabled: spec.disabled || null });
+        slider.addEventListener("input", () => {
+          S.god[spec.key] = Number(slider.value);
+          valueLabel.textContent = fmtParam(spec, S.god[spec.key]);
+          if (numberBox) numberBox.value = slider.value;
+        });
+        let numberBox = null;
+        if (spec.number) {
+          numberBox = el("input", { class: "input", type: "number", min: spec.min, max: spec.max, step: 1, value: v });
+          numberBox.addEventListener("change", () => {
+            const n = clamp(Math.round(Number(numberBox.value) || spec.min), spec.min, spec.max);
+            S.god[spec.key] = n; numberBox.value = n; slider.value = n;
+            valueLabel.textContent = fmtParam(spec, n);
+          });
+        }
