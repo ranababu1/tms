@@ -28,3 +28,18 @@ Your key is stored in this tab's `sessionStorage`. It is sent in the body of eac
 
 ## Tests
 
+```bash
+python -m pytest -q
+```
+
+The tests mock the provider calls, so they need no network access and no API keys.
+
+## Layout
+
+```
+app/
+  main.py              FastAPI app, page routes, security headers
+  pages.py             per-page config (provider x mode) passed to the JS app
+  api/routes.py        the 11 POST /api/* endpoints ({"error": "..."} on failure)
+  core/
+    prompts/           verbatim de/tr/vi prompts + shared prompt strings
