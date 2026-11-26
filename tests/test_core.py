@@ -118,3 +118,16 @@ def test_pick_latest_claude_models():
         {"id": "other-model", "created_at": "2027-01-01T00:00:00Z"},
     ]
     out = M.pick_latest_claude_models(raw)
+    assert [m["id"] for m in out] == ["claude-opus-5-5", "claude-sonnet-5", "claude-haiku-4-5"]
+    assert out[2]["label"] == "Claude Haiku 4 5" and out[2]["outputTokenLimit"] == 64000
+    assert out[0]["pricing"]["inputPer1M"] == 4.0
+
+
+# ---- pricing --------------------------------------------------------------
+
+def test_pricing_math_and_formatters():
+    p = {"inputPer1M": 2.0, "outputPer1M": 10.0}
+    assert pricing.request_cost({"inputTokens": 1_000_000, "outputTokens": 100_000}, p) == 3.0
+    assert round(pricing.cost_per_lakh_chars(p), 6) == 0.6  # 2 * (0.025*2 + 0.025*10)
+    assert pricing.format_usd(0.005) == "$0.0050" and pricing.format_usd(1.5) == "$1.50"
+    assert pricing.format_inr(0.5) == "₹0.500" and pricing.format_inr(2) == "₹2.00"
