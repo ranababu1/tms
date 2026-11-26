@@ -103,3 +103,18 @@ English source: "By unifying customer data across all channels, CleverTap helps 
 - Return ONLY the translated content — no explanations, comments, or notes.
 - Do NOT wrap output in markdown code blocks or any other formatting."""
 
+TWO_PHASE_OUTPUT_FORMAT = r"""
+REQUIRED OUTPUT FORMAT
+
+Produce your response in exactly three tagged sections:
+
+<draft>
+Your initial Vietnamese translation — write freely, do not self-censor here.
+</draft>
+
+<critique>
+Work through each check below. Mark each PASS or FAIL with a one-line note.
+1. All tone marks (diacritics) correct and present on every word?
+2. Noun classifiers used correctly wherever required?
+3. No passive "được" constructions where active voice is natural?
+4. All sentences under 20 words, breaking long English clauses?
