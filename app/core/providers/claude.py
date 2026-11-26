@@ -13,3 +13,18 @@ def _headers(api_key: str) -> dict:
         "x-api-key": api_key.strip(),
         "anthropic-version": ANTHROPIC_VERSION,
         "Content-Type": "application/json",
+    }
+
+
+def _error_message(response: httpx.Response) -> str:
+    try:
+        msg = response.json().get("error", {}).get("message")
+        if msg:
+            return msg
+    except (ValueError, AttributeError):
+        pass
+    return f"Anthropic API error: {response.status_code}"
+
+
+async def _request(method: str, path: str, api_key: str, **kwargs) -> dict:
+    try:
