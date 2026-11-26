@@ -88,3 +88,18 @@
       </div>
     </div>
 
+    <div class="panel hidden" id="panel-dynamic"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>Transcreator · {{ cfg.providerName }}</span>
+    <span>Prefer another provider? <a href="{{ cfg.crossLink.href }}">Try {{ cfg.crossLink.label }} →</a></span>
+  </div>
+</footer>
+
+<!-- API key modal -->
+<div class="modal-backdrop hidden" id="key-modal" role="dialog" aria-modal="true" aria-labelledby="key-modal-title">
+  <div class="glass-card modal">
+    <div class="modal-head">
