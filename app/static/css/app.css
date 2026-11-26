@@ -43,3 +43,18 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .faint { color: var(--text-faint); }
 .hidden { display: none !important; }
 
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--surface-base); }
+::-webkit-scrollbar-thumb { background: var(--border-default); border-radius: 8px; border: 2px solid var(--surface-base); }
+::-webkit-scrollbar-thumb:hover { background: #3a3e50; }
+* { scrollbar-color: var(--border-default) var(--surface-base); }
+
+/* Layout */
+.container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+.site-header {
+  position: sticky; top: 0; z-index: 30;
+  background: rgba(15, 17, 23, 0.82);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-default);
+}
