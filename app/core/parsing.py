@@ -13,3 +13,18 @@ _OBJECT_RE = re.compile(r"\{.*\}", re.DOTALL)
 
 
 def parse_tags(raw: str) -> dict[str, str | None]:
+    """Split a draft/critique/final response. Missing <final> returns the raw text unstripped."""
+    draft = _DRAFT_RE.search(raw)
+    critique = _CRITIQUE_RE.search(raw)
+    final = _FINAL_RE.search(raw)
+    return {
+        "translatedText": final.group(1).strip() if final else raw,
+        "draftText": draft.group(1).strip() if draft else None,
+        "critiqueText": critique.group(1).strip() if critique else None,
+    }
+
+
+def parse_json_tolerant(raw: str) -> Any | None:
+    """Fenced block, then whole text, then the first greedy {...}. None when nothing parses."""
+    text = raw.strip()
+    fence = _FENCE_RE.search(text)
