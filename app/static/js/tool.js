@@ -163,3 +163,18 @@
   }
 
   function setTarget(newTarget) {
+    const old = S.target;
+    S.target = newTarget;
+    store.set(cfg.storage.target, newTarget);
+    if (isGod) {
+      const prompt = $("system-prompt");
+      if (prompt.value === templateFor(old)) prompt.value = templateFor(newTarget);
+    }
+  }
+
+  modelSelect.addEventListener("change", () => {
+    S.model = modelSelect.value;
+    if (isGod) S.god.maxTokens = clamp(S.god.maxTokens, 1, godMaxCap());
+    renderModelSelect();
+    renderGodControls();
+  });
