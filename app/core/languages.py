@@ -28,3 +28,6 @@ UI_LANGUAGES: list[dict[str, str]] = [
 ]
 
 
+def language_name(code: str) -> str:
+    """Name for a code, or the code itself when unknown."""
+    return LANGUAGE_NAMES.get(code, code)
