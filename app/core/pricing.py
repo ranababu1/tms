@@ -13,3 +13,18 @@ def request_cost(usage: dict, pricing: dict) -> float:
 
 
 def cost_per_lakh_chars(pricing: dict) -> float:
+    """1 lakh chars ≈ 25k tokens each way (4 chars/token), doubled for draft+critique+final."""
+    tokens = CHARS_PER_LAKH / 4
+    return 2 * (tokens / 1e6 * pricing["inputPer1M"] + tokens / 1e6 * pricing["outputPer1M"])
+
+
+def format_usd(value: float) -> str:
+    return f"${value:.4f}" if value < 0.01 else f"${value:.2f}"
+
+
+def format_inr(value: float) -> str:
+    return f"₹{value:.3f}" if value < 1 else f"₹{value:.2f}"
+
+
+def pricing_summary(pricing: dict) -> dict:
+    """Pre-computed figures the model-info modal shows."""
