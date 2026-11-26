@@ -73,3 +73,18 @@ Rules:
 
 REVIEW_USER = (
     "Source text:\n{originalText}\n\nTarget language: {targetLangName}\n\n"
+    "Translated text to review:\n{translatedText}"
+)
+
+# B.6 — God Mode.
+GODMODE_PLACEHOLDER = (
+    "No predefined prompt for {LangName} yet. You can write your own here — it will be sent "
+    "as-is (the code/markup preservation rules are still appended automatically and aren't "
+    "editable)."
+)
+
+GODMODE_HARDCODED_RULES = """
+CODE/MARKUP RULES (non-negotiable):
+6. PRESERVE ALL of the following EXACTLY as-is: HTML tags and attributes, CSS, JavaScript, PHP, WordPress shortcodes, template expressions ({{ variable }}, {variable}), variable/function names, URLs, email addresses, file paths, numbers, dates in technical formats.
+7. Maintain the EXACT same structure, formatting, indentation, and line breaks as the original.
+8. If the content is purely code with no translatable text, return it unchanged.
