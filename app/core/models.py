@@ -43,3 +43,18 @@ def gemini_model(alias: dict, input_limit: int, output_limit: int) -> dict:
 
 
 def gemini_fallback_models() -> list[dict]:
+    lim = GEMINI_FALLBACK_LIMITS
+    return [gemini_model(a, lim["inputTokenLimit"], lim["outputTokenLimit"]) for a in GEMINI_ALIASES]
+
+
+# ---- Claude ---------------------------------------------------------------
+CLAUDE_DEFAULT_MAX_OUTPUT_TOKENS = 64000
+CLAUDE_GODMODE_MAX_OUTPUT_CAP = 128000
+CLAUDE_EFFORT_LEVELS = ("low", "medium", "high", "xhigh", "max")
+ANTHROPIC_VERSION = "2023-06-01"
+CLAUDE_FAMILY_ORDER = ("opus", "sonnet", "haiku")
+
+CLAUDE_FAMILY_LIMITS = {
+    "opus": {"inputTokenLimit": 1_000_000, "outputTokenLimit": 128_000},
+    "sonnet": {"inputTokenLimit": 1_000_000, "outputTokenLimit": 128_000},
+    "haiku": {"inputTokenLimit": 200_000, "outputTokenLimit": 64_000},
