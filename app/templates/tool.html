@@ -13,3 +13,18 @@
     <div class="header-actions">
       <a class="btn btn-sm btn-ghost" href="{{ cfg.modeLink.href }}">{{ cfg.modeLink.label }}</a>
       <button class="btn btn-sm btn-accent" id="btn-set-key" type="button">Set API Key</button>
+      <a class="btn btn-sm" href="{{ cfg.keyLink }}" target="_blank" rel="noopener noreferrer">Get API Key ↗</a>
+    </div>
+  </div>
+</header>
+
+<main class="container tool-main stack">
+  <!-- Controls -->
+  <section class="glass-card card-pad">
+    <div class="controls-grid">
+      <div class="field model-field">
+        <label class="field-label" for="model-select">Model</label>
+        <div class="model-row">
+          <select class="select" id="model-select"></select>
+          <div class="token-meta-slider" id="token-meta" role="button" tabindex="0" title="Model info and pricing">
+            <ul>
