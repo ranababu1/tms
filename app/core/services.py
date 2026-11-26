@@ -43,3 +43,18 @@ def _clamp(value: float, lo: float, hi: float) -> float:
 
 
 def _key_ok(body: dict) -> bool:
+    return len(_s(body, "apiKey").strip()) >= 10
+
+
+def _require(cond: bool, message: str) -> None:
+    if not cond:
+        raise ServiceError(400, message)
+
+
+def _check_languages(source: str, target: str) -> None:
+    if source and source != "auto" and source == target:
+        raise ServiceError(400, "Source and target languages must be different.")
+
+
+# ---- Claude error mapping -------------------------------------------------
+
