@@ -58,3 +58,18 @@ PAGES = {
 }
 
 
+def page_config(provider: str, mode: str) -> dict:
+    prov = PROVIDERS[provider]
+    page = PAGES[(provider, mode)]
+    other = "claude" if provider == "gemini" else "gemini"
+    loading = GEMINI_LOADING if provider == "gemini" else CLAUDE_LOADING
+    if mode == "god" and provider == "gemini":
+        loading = [m if m != "Retaining output structure" else "Aligning output structure" for m in loading]
+    if mode == "god" and provider == "claude":
+        loading = [m for m in loading if m != "Retaining output structure"]
+
+    return {
+        "provider": provider,
+        "mode": mode,
+        "providerName": prov["name"],
+        "accent": page["accent"],
