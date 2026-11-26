@@ -13,3 +13,18 @@ LANGUAGE_NAMES: dict[str, str] = {
     "es": "Spanish",
     "tr": "Turkish",
     "vi": "Vietnamese",
+}
+
+# Target languages that have a dedicated, hand-written prompt.
+LANGUAGES_WITH_PROMPT: tuple[str, ...] = ("de", "tr", "vi")
+
+# Order shown in the From/To selects ("auto" is source-only).
+UI_LANGUAGES: list[dict[str, str]] = [
+    {"code": "auto", "label": "Auto-detect"},
+    *[
+        {"code": code, "label": LANGUAGE_NAMES[code]}
+        for code in ("ar", "en", "fr", "de", "el", "ja", "zh", "pt", "es", "tr", "vi")
+    ],
+]
+
+
