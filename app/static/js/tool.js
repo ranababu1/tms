@@ -373,3 +373,18 @@
       try { document.execCommand("copy"); } catch { /* ignore */ }
       ta.remove();
     }
+    S.copied = true; render();
+    setTimeout(() => { S.copied = false; render(); }, 1500);
+  }
+
+  function reviewView() {
+    if (!cfg.endpoints.review) return null;
+    const r = S.review;
+    if (r.state === "idle") {
+      return el("p", { class: "modal-note" }, "Use Translate and Review for a second-pass quality check.");
+    }
+    if (r.state === "waiting") {
+      return el("div", { class: "review-card loading-text-shimmer" }, "Translation agent done. Starting review agent in 5 seconds...");
+    }
+    if (r.state === "running") {
+      return el("div", { class: "review-card loading-text-shimmer" }, "Review agent working on quality and accuracy checks...");
