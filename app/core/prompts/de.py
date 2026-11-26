@@ -28,3 +28,18 @@ Non-negotiable — use exactly as listed, every time, no paraphrasing.
 |---|---|
 | Agentic AI | Autonome KI |
 | Individualization | Personalisierung |
+| Decisioning Engine | Entscheidungsautomatik |
+| Dataverse | Dataverse |
+| Lifecycle Campaigns | Lifecycle-Kampagnen |
+| Customer Engagement | Customer Engagement |
+| Push Notifications | Push-Benachrichtigungen |
+| Retention | Retention |
+| Onboarding | Onboarding |
+| Dashboard | Dashboard |
+| Workflow | Workflow |
+| Reporting | Reporting |
+
+## STYLE RULES (critical for natural output)
+
+### Sentence length & complexity
+- Max 20 words/sentence, natural flowing rhythm. Break 20+ word English sentences into two or three punchier German ones.
