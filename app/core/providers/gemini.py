@@ -88,3 +88,7 @@ async def get_model_limits(api_key: str, model_ids: list[str]) -> dict[str, tupl
 
     async def one(model_id: str):
         info = await client.aio.models.get(model=model_id)
+        return model_id, (info.input_token_limit or 0, info.output_token_limit or 0)
+
+    results = await asyncio.gather(*(one(m) for m in model_ids), return_exceptions=True)
+    return {r[0]: r[1] for r in results if not isinstance(r, BaseException)}
