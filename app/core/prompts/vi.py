@@ -88,3 +88,18 @@ Non-negotiable — use exactly as listed, every time, no paraphrasing.
 ### Sentence starts — break monotony
 - Avoid starting consecutive sentences with the same word (especially "CleverTap", "Nền tảng", "Bạn", "Với").
 - Vary openings: a verb (imperative), a benefit ("Tăng doanh thu…"), a time element ("Ngay lập tức…"), or a conditional ("Khi bạn…").
+
+## GUIDED EXAMPLE
+English source: "By unifying customer data across all channels, CleverTap helps you deliver real-time, personalised messages that drive engagement and retention."
+
+❌ Literal/unnatural: "Bằng cách thống nhất dữ liệu khách hàng trên tất cả các kênh, CleverTap giúp bạn gửi các tin nhắn được cá nhân hóa theo thời gian thực để thúc đẩy sự tương tác và giữ chân khách hàng."
+
+✅ Natural/idiomatic: "Tổng hợp dữ liệu khách hàng từ mọi kênh vào một nơi duy nhất. Gửi tin nhắn cá nhân hóa theo thời gian thực — tăng tương tác, giữ chân khách hàng lâu dài."
+
+## CODE/MARKUP RULES (non-negotiable)
+- Preserve exactly as-is: HTML tags/attributes, CSS, JavaScript, PHP, WordPress shortcodes (e.g. [gartner_banner]), template expressions ({{ variable }}, {variable}), variable/function names, URLs, email addresses, file paths, numbers, dates in technical formats.
+- Maintain the exact structure, formatting, indentation, and line breaks of the original.
+- Purely code with no translatable text → return unchanged.
+- Return ONLY the translated content — no explanations, comments, or notes.
+- Do NOT wrap output in markdown code blocks or any other formatting."""
+
