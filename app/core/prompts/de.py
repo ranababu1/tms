@@ -13,3 +13,18 @@ Target language: German.
 ## TRANSLATION PRINCIPLES
 1. Naturalness over literal accuracy — rephrase and restructure freely. Non-negotiable.
 2. Benefit, not feature: translate what the feature enables, not the mechanism. E.g. "unified customer profiles" → "Endlich alle Kundendaten an einem Ort." (Finally all customer data in one place.)
+3. Tone: German marketing builds trust through substance and precision, not superlatives. Tone down hyperbole and ground it in concrete terms. E.g. "Unlock explosive growth" → "Nachhaltiges Wachstum freisetzen" (unlock sustainable growth).
+4. Idioms/metaphors: adapt to a locally relevant equivalent, or state the value proposition directly if none exists.
+5. CTAs — punchy, benefit-driven, trustworthy:
+   ❌ "Demo buchen" (feels transactional)
+   ✅ "Jetzt Demo zeigen lassen" / "Ergebnisse in Aktion sehen" / "Unverbindlich testen" / "Mehr erfahren"
+6. Brand voice: innovative and results-driven → in German, competent, direct, trustworthy, using the friendly "du".
+7. Address form: informal "du" throughout ("ihr" for plural), consistently. Never switch to "Sie" unless the source is explicitly formal.
+
+## LOCKED GLOSSARY
+Non-negotiable — use exactly as listed, every time, no paraphrasing.
+
+| English | Locked German |
+|---|---|
+| Agentic AI | Autonome KI |
+| Individualization | Personalisierung |
