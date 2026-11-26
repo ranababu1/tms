@@ -58,3 +58,18 @@ def _check_languages(source: str, target: str) -> None:
 
 # ---- Claude error mapping -------------------------------------------------
 
+def _claude_translate_error(exc: ProviderError, model: str) -> ServiceError:
+    mapped = {
+        401: "Invalid API key. Please check your Anthropic API key.",
+        403: "Access denied. Check your Anthropic API key and account permissions.",
+        429: "Rate limit exceeded. Please wait a moment and try again.",
+        404: f'Model "{model}" not found. It may not be available for your account yet.',
+    }
+    if exc.status in mapped:
+        return ServiceError(exc.status, mapped[exc.status])
+    return ServiceError(500, exc.message or f"Anthropic API error: {exc.status}")
+
+
+def _claude_godmode_error(exc: ProviderError, model: str) -> ServiceError:
+    mapped = {
+        401: "Invalid API key.",
