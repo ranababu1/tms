@@ -58,3 +58,18 @@ def test_invalid_json_body():
 @pytest.mark.parametrize("body,msg", [
     ({}, "Text to translate is required."),
     ({"text": "hi"}, "Target language is required."),
+    ({"text": "hi", "targetLang": "de"}, "Model selection is required."),
+    ({"text": "hi", "targetLang": "de", "sourceLang": "de", "model": "m"}, "Source and target languages must be different."),
+    ({"text": "hi", "targetLang": "de", "model": "m", "apiKey": " short "}, "A valid Gemini API key is required."),
+])
+def test_gemini_translate_validation(body, msg):
+    r = post("/api/translate", body)
+    assert r.status_code == 400 and r.json() == {"error": msg}
+
+
+def test_claude_translate_validation():
+    base = {"text": "hi", "targetLang": "de"}
+    assert post("/api/translate-claude", base).json()["error"] == "API key is required."
+    r = post("/api/translate-claude", {**base, "apiKey": KEY, "model": "gpt-4"})
+    assert r.json()["error"] == "Invalid model selection."
+    r = post("/api/translate-claude", {**base, "apiKey": "short", "model": "claude-sonnet-5"})
