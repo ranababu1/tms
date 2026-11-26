@@ -688,3 +688,18 @@
         el("td", { class: "faint" }, m.id),
         el("td", {}, full.format(m.inputTokenLimit)),
         el("td", {}, full.format(m.outputTokenLimit)),
+        el("td", {}, `${usdSmart(p.inputPer1M)} / ${usdSmart(p.outputPer1M)}`),
+        el("td", {}, `${inrSmart(p.inputPer1MInr)} / ${inrSmart(p.outputPer1MInr)}`),
+        el("td", {}, `${usdSmart(p.perLakhUsd)} · ${inrSmart(p.perLakhInr)}`));
+    });
+    $("model-table").replaceChildren(el("table", { class: "models" },
+      el("thead", {}, el("tr", {}, head.map((h) => el("th", {}, h)))), el("tbody", {}, rows)));
+    $("model-modal-footer").textContent = S.fetchedAt && !S.catalogFallback
+      ? `Live catalog, cached ${new Date(S.fetchedAt).toLocaleString()}. Per-lakh cost assumes ~4 chars/token, counted as input and output, doubled for draft+critique+final. USD→INR at 88.`
+      : "Showing the default model list. Set an API key to load the live catalog.";
+    modelModal.classList.remove("hidden");
+  }
+  const tokenMeta = $("token-meta");
+  tokenMeta.addEventListener("click", openModelModal);
+  tokenMeta.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openModelModal(); } });
+  $("model-modal-close").addEventListener("click", () => modelModal.classList.add("hidden"));
