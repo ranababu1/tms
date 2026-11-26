@@ -43,3 +43,18 @@ PROVIDERS = {
 PAGES = {
     ("gemini", "simple"): {"path": "/translate", "accent": "cyan", "title": "Gemini Translator",
                            "translate": "/api/translate", "verify": "/api/verify-translation",
+                           "fix": "/api/fix-translation", "review": "/api/review-translation",
+                           "defaultModel": "gemini-flash-lite-latest"},
+    ("claude", "simple"): {"path": "/translate/claude", "accent": "violet", "title": "Claude Translator",
+                           "translate": "/api/translate-claude", "verify": "/api/verify-translation-claude",
+                           "fix": "/api/fix-translation-claude", "review": None,
+                           "defaultModel": "claude-sonnet-5"},
+    ("gemini", "god"): {"path": "/godmode", "accent": "amber", "title": "God Mode · Gemini",
+                        "translate": "/api/godmode", "verify": None, "fix": None,
+                        "review": "/api/review-translation", "defaultModel": "gemini-flash-latest"},
+    ("claude", "god"): {"path": "/godmode/claude", "accent": "amber", "title": "God Mode · Claude",
+                        "translate": "/api/godmode-claude", "verify": None, "fix": None,
+                        "review": None, "defaultModel": "claude-sonnet-5"},
+}
+
+
