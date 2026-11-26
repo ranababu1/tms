@@ -208,3 +208,18 @@ main.tool-main { padding: 28px 0 0; }
 .review-card h4 { margin: 0 0 8px; font-size: 13px; color: var(--text-primary); }
 .review-card ul { margin: 0 0 10px; padding-left: 18px; }
 
+/* Loading orb */
+.translation-wow { display: grid; place-items: center; padding: 40px 16px; text-align: center; }
+.translation-wow-card { display: flex; flex-direction: column; align-items: center; gap: 18px; max-width: 420px; width: 100%; }
+.translation-wow-title { font-size: 15px; color: var(--text-primary); font-weight: 600; margin: 0; }
+.ai-orb { position: relative; width: 96px; height: 96px; }
+.ai-orb-ring {
+  position: absolute; inset: 0; border-radius: 50%;
+  border: 2px solid transparent; border-top-color: var(--accent); border-right-color: var(--accent-warm);
+  animation: spin 1.4s linear infinite;
+}
+.ai-orb-ring.r2 { inset: 12px; animation-duration: 2.1s; animation-direction: reverse; opacity: .7; }
+.ai-orb-core {
+  position: absolute; inset: 28px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff, var(--accent) 45%, transparent 75%);
+  filter: blur(1px); animation: breathe 1.8s ease-in-out infinite;
