@@ -493,3 +493,18 @@
     renderCost();
   }
 
+  // ---------- requests ----------
+  function translationBody() {
+    const base = {
+      text: input.value, sourceLang: S.source, targetLang: S.target, model: S.model, apiKey: S.apiKey,
+    };
+    if (!isGod) return { ...base, maxOutputTokens: modelOutputLimit() };
+    const g = S.god;
+    const systemPrompt = $("system-prompt").value;
+    if (isClaude) {
+      return { ...base, systemPrompt, temperature: g.temperature, topK: g.topK,
+        maxOutputTokens: g.maxTokens, effort: g.effort };
+    }
+    const body = { ...base, systemPrompt, temperature: g.temperature, topP: g.topP, topK: g.topK,
+      maxOutputTokens: g.maxTokens, presencePenalty: g.presencePenalty,
+      frequencyPenalty: g.frequencyPenalty, thinkingLevel: g.thinkingLevel };
