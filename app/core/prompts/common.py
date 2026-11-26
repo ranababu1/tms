@@ -88,3 +88,7 @@ CODE/MARKUP RULES (non-negotiable):
 6. PRESERVE ALL of the following EXACTLY as-is: HTML tags and attributes, CSS, JavaScript, PHP, WordPress shortcodes, template expressions ({{ variable }}, {variable}), variable/function names, URLs, email addresses, file paths, numbers, dates in technical formats.
 7. Maintain the EXACT same structure, formatting, indentation, and line breaks as the original.
 8. If the content is purely code with no translatable text, return it unchanged.
+
+OUTPUT RULES:
+9. Return ONLY the translated content — no explanations, comments, or notes.
+10. Do NOT wrap output in markdown code blocks or any other formatting."""
