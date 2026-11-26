@@ -238,3 +238,18 @@
   }
 
   function renderGodControls() {
+    if (!isGod) return;
+    const host = $("gm-controls");
+    host.replaceChildren(...godControlSpecs().map((spec) => {
+      const v = S.god[spec.key];
+      const valueLabel = el("span", { class: "val" }, spec.select || spec.seed ? "" : fmtParam(spec, v));
+      let input;
+      if (spec.select) {
+        input = el("select", { class: "select", disabled: spec.disabled || null,
+          onchange: (e) => { S.god[spec.key] = e.target.value; } },
+          spec.select.map((o) => el("option", { value: o, selected: o === v }, o)));
+      } else if (spec.seed) {
+        input = el("input", { class: "input", type: "number", min: 0, step: 1, placeholder: "Random", value: v,
+          oninput: (e) => { S.god.seed = e.target.value; } });
+      } else {
+        const slider = el("input", { class: "gm-slider", type: "range", min: spec.min, max: spec.max,
