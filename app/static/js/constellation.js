@@ -28,3 +28,18 @@
     const count = clamp(Math.floor((w * h) / 9000), 70, 220);
     particles = Array.from({ length: count }, () => ({
       x: rand(0, w), y: rand(0, h),
+      vx: rand(-DRIFT_SPEED, DRIFT_SPEED), vy: rand(-DRIFT_SPEED, DRIFT_SPEED),
+      r: rand(0.8, 2.2), hue: rand(190, 320), phase: rand(0, Math.PI * 2),
+    }));
+  }
+
+  function step(t) {
+    ctx.clearRect(0, 0, w, h);
+    ctx.globalCompositeOperation = "lighter";
+
+    for (const p of particles) {
+      if (mouse.active) {
+        const dx = mouse.x - p.x, dy = mouse.y - p.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < ATTRACT_RADIUS && dist > 1) {
+          const f = 1 - dist / ATTRACT_RADIUS;
