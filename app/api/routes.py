@@ -13,3 +13,18 @@ from ..core.services import ServiceError
 log = logging.getLogger("tms.api")
 router = APIRouter(prefix="/api")
 
+Handler = Callable[[dict], Awaitable[dict]]
+
+
+def error(status: int, message: str) -> JSONResponse:
+    return JSONResponse({"error": message}, status_code=status)
+
+
+async def _run(request: Request, handler: Handler) -> JSONResponse:
+    try:
+        body = await request.json()
+    except (ValueError, json.JSONDecodeError, UnicodeDecodeError):
+        return error(400, "Invalid request body.")
+    if not isinstance(body, dict):
+        return error(400, "Invalid request body.")
+    try:
