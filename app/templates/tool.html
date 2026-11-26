@@ -103,3 +103,18 @@
 <div class="modal-backdrop hidden" id="key-modal" role="dialog" aria-modal="true" aria-labelledby="key-modal-title">
   <div class="glass-card modal">
     <div class="modal-head">
+      <h2 id="key-modal-title">{{ cfg.keyModal.title }}</h2>
+      <span class="pill">Session only</span>
+    </div>
+    <div class="key-row">
+      <input class="input" id="key-input" type="password" autocomplete="off" spellcheck="false"
+        placeholder="{{ cfg.keyModal.placeholder }}">
+      <button class="btn" id="key-toggle" type="button">Show</button>
+    </div>
+    {% if cfg.keyModal.showNote %}
+    <p class="modal-note">Stored in session storage only — cleared when you close the tab. Sent with each request to this app’s server, which forwards it to the provider and never stores or logs it.</p>
+    {% endif %}
+    {% if cfg.keyModal.showVerify %}
+    <label class="checkbox-row">
+      <input type="checkbox" id="verify-checkbox">
+      <span>
