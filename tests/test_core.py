@@ -73,3 +73,18 @@ def test_parse_tags_full_and_missing_final():
     assert parsing.parse_tags(raw) == {"translatedText": "f", "draftText": "d", "critiqueText": "1. PASS"}
     raw2 = "  just text  "
     assert parsing.parse_tags(raw2) == {"translatedText": raw2, "draftText": None, "critiqueText": None}
+
+
+def test_parse_json_tolerant():
+    assert parsing.parse_json_tolerant('```json\n{"a": 1}\n```') == {"a": 1}
+    assert parsing.parse_json_tolerant('noise {"a": {"b": 2}} tail') == {"a": {"b": 2}}
+    assert parsing.parse_json_tolerant("{broken") is None
+    assert parsing.parse_json_tolerant("") is None
+
+
+def test_normalize_verification():
+    checklist = ["a", "b"]
+    parsed = {"results": [{"pass": 1, "note": "ok"}, {"item": 2, "pass": False}, {"pass": True}]}
+    out = parsing.normalize_verification(parsed, checklist)
+    assert out["results"] == [{"item": 1, "pass": True, "note": "ok"}, {"item": 2, "pass": False, "note": ""}]
+    assert out["allPassed"] is False
