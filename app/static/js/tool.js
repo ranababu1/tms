@@ -28,3 +28,18 @@
   }
   const store = {
     get(k) { try { return k ? sessionStorage.getItem(k) : null; } catch { return null; } },
+    set(k, v) { try { if (k) sessionStorage.setItem(k, v); } catch { /* storage blocked */ } },
+    del(k) { try { if (k) sessionStorage.removeItem(k); } catch { /* storage blocked */ } },
+  };
+  const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const usd2 = (v) => "$" + v.toFixed(2);
+  const usdSmart = (v) => "$" + (v < 0.01 ? v.toFixed(4) : v.toFixed(2));
+  const inrSmart = (v) => "₹" + (v < 1 ? v.toFixed(3) : v.toFixed(2));
+  const compact = new Intl.NumberFormat("en", { notation: "compact", maximumFractionDigits: 1 });
+  const full = new Intl.NumberFormat("en");
+
+  async function postJSON(url, body) {
+    let res;
+    try {
+      res = await fetch(url, {
