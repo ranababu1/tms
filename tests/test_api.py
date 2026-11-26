@@ -193,3 +193,18 @@ def test_fix(monkeypatch):
     calls = []
     monkeypatch.setattr(services.gemini, "generate", fake("  fixed  ", calls=calls))
     r = post("/api/fix-translation", {**body, "failingChecks": [{"description": "d", "note": "n"}]})
+    assert r.json()["translatedText"] == "fixed"
+    assert "1. d — Reviewer note: n" in calls[0]["args"][2]
+    assert calls[0]["kwargs"]["temperature"] == 0.5
+
+
+def test_review(monkeypatch):
+    calls = []
+    monkeypatch.setattr(services.gemini, "generate",
+                        fake('{"hasIssues": true, "issues": ["a"], "correctedTranslation": "better"}', calls=calls))
+    body = {"originalText": "o", "translatedText": "t", "targetLang": "Turkish", "model": "m", "apiKey": KEY}
+    data = post("/api/review-translation", body).json()
+    assert data["hasIssues"] and data["issues"] == ["a"] and data["correctedTranslation"] == "better"
+    assert "native Turkish speaker" in calls[0]["args"][2]
+    monkeypatch.setattr(services.gemini, "generate", fake("{oops"))
+    data = post("/api/review-translation", body).json()
