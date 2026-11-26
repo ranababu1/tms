@@ -28,3 +28,14 @@ def format_inr(value: float) -> str:
 
 def pricing_summary(pricing: dict) -> dict:
     """Pre-computed figures the model-info modal shows."""
+    lakh = cost_per_lakh_chars(pricing)
+    return {
+        "inputPer1M": pricing["inputPer1M"],
+        "outputPer1M": pricing["outputPer1M"],
+        "inputPer1MInr": pricing["inputPer1M"] * USD_TO_INR,
+        "outputPer1MInr": pricing["outputPer1M"] * USD_TO_INR,
+        "perLakhUsd": lakh,
+        "perLakhInr": lakh * USD_TO_INR,
+        "perLakhUsdText": format_usd(lakh),
+        "perLakhInrText": format_inr(lakh * USD_TO_INR),
+    }
