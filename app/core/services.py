@@ -28,3 +28,18 @@ class ServiceError(Exception):
 
 def _s(body: dict, key: str) -> str:
     value = body.get(key)
+    return value if isinstance(value, str) else ""
+
+
+def _num(body: dict, key: str, default: float) -> float:
+    value = body.get(key)
+    if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+        return default
+    return float(value)
+
+
+def _clamp(value: float, lo: float, hi: float) -> float:
+    return max(lo, min(hi, value))
+
+
+def _key_ok(body: dict) -> bool:
