@@ -13,3 +13,18 @@ FALLBACK_OVERRIDE = (
     "informal-professional address) using what is natural for {LangName}. Ignore German-only "
     "grammar, spelling, pronoun, glossary and compound-word rules and the German example "
     "sentences; use the closest natural {LangName} equivalents instead. Output ONLY {LangName}.\n"
+    "\n"
+)
+
+# B.3 — extra note for the verifier when the German checklist is borrowed.
+CHECKLIST_NOTE = (
+    "\nNote: this checklist was written for German. Where an item mentions German-specific "
+    'rules (e.g. "du"/"ihr", German capitalization, "-ung" nouns), judge the {LangName} '
+    "equivalent instead.\n"
+)
+
+VERIFY_PROMPT = """You are an independent quality reviewer checking a {LangName} marketing translation you did NOT write. You have no memory of producing it — grade it strictly and honestly on its own merits.
+
+You will receive the ORIGINAL source text and the FINAL translated text.
+
+Grade the FINAL text against every item below. Mark each PASS only if it is genuinely satisfied — do not give the benefit of the doubt.
