@@ -28,3 +28,18 @@ PROVIDERS = {
         "fallbackModels": M.gemini_fallback_models,
     },
     "claude": {
+        "name": "Claude",
+        "keyStorage": "claude_translator_api_key",
+        "verifyStorage": "claude_translator_verify_enabled",
+        "targetStorage": "claude_translator_target_lang",
+        "keyLink": "https://console.anthropic.com/settings/keys",
+        "keyPlaceholder": "Paste your Anthropic API key",
+        "noKeyError": "Please enter your Anthropic API key.",
+        "modelsEndpoint": "/api/claude-models",
+        "fallbackModels": M.claude_fallback_models,
+    },
+}
+
+PAGES = {
+    ("gemini", "simple"): {"path": "/translate", "accent": "cyan", "title": "Gemini Translator",
+                           "translate": "/api/translate", "verify": "/api/verify-translation",
