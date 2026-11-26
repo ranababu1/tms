@@ -148,3 +148,18 @@ async def translate_claude(body: dict) -> dict:
             _s(body, "apiKey"), model, pb.build_translation_system_prompt(source, target), text,
             max_tokens, **_claude_sampling(model, 0.7, 100),
         )
+    except ProviderError as exc:
+        raise _claude_translate_error(exc, model) from None
+    except Exception:
+        raise ServiceError(500, "An unexpected error occurred. Please try again.") from None
+    if not c.text.strip():
+        raise ServiceError(500, "No translation was returned. The model may have produced empty output.")
+    return _translate_response(c, body, parsing.parse_tags(c.text))
+
+
+# ---- God Mode -------------------------------------------------------------
+
+def _godmode_response(c: Completion, body: dict) -> dict:
+    return {
+        "translatedText": c.text.strip(),
+        "model": _s(body, "model"),
