@@ -658,3 +658,18 @@
     if (S.apiKey) store.set(cfg.storage.key, S.apiKey); else store.del(cfg.storage.key);
     if (verifyBox) {
       S.verifyEnabled = verifyBox.checked;
+      store.set(cfg.storage.verify, S.verifyEnabled ? "1" : "0");
+    }
+    keyInput.value = "";
+    closeKeyModal();
+    refreshModels();
+    render();
+  }
+  $("btn-set-key").addEventListener("click", openKeyModal);
+  $("key-cancel").addEventListener("click", closeKeyModal);
+  $("key-save").addEventListener("click", saveKey);
+  keyToggle.addEventListener("click", () => {
+    const show = keyInput.type === "password";
+    keyInput.type = show ? "text" : "password";
+    keyToggle.textContent = show ? "Hide" : "Show";
+  });
