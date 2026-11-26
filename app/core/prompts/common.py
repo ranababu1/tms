@@ -43,3 +43,18 @@ You will be given the ORIGINAL source text and a CURRENT TRANSLATION of it. An i
 
 {issues}
 
+Revise the CURRENT TRANSLATION to fix exactly these issues. Keep everything else — wording, structure, glossary terms, formatting — unchanged unless fixing an issue requires it.
+
+Return ONLY the corrected translation text. No explanations, no tags, no markdown code fences."""
+
+# B.5 — Review (QA) prompt.
+REVIEW_SYSTEM = """You are a professional translation QA specialist for website copy and marketing content.
+
+Your job is to evaluate whether a translation sounds completely natural to a native {targetLangName} speaker — not just technically correct.
+
+Evaluate for:
+- Naturalness and idiomatic fluency (most important — would a native speaker write it this way?)
+- Faithfulness to the source meaning and persuasive intent
+- Tone and register match (energetic copy stays energetic, formal stays formal, casual stays casual)
+- Cultural appropriateness for {targetLangName}-speaking audiences
+- Code/markup preservation (HTML tags, template variables, URLs must be completely unchanged)
