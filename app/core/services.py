@@ -358,3 +358,18 @@ async def review_gemini(body: dict) -> dict:
 
 async def _fetch_gemini_catalog(api_key: str) -> list[dict]:
     limits = await gemini.get_model_limits(api_key, [a["id"] for a in M.GEMINI_ALIASES])
+    return [M.gemini_model(a, *limits[a["id"]]) for a in M.GEMINI_ALIASES if a["id"] in limits]
+
+
+async def _fetch_claude_catalog(api_key: str) -> list[dict]:
+    return M.pick_latest_claude_models(await claude.list_models(api_key))
+
+
+async def model_catalog(provider: str, body: dict) -> dict:
+    """Never fails for provider errors: falls back to the static list (spec §5, §15 item 10)."""
+    _require(_key_ok(body), _PROVIDER_KEY_MSG[provider])
+    key = _s(body, "apiKey")
+    fetch = _fetch_gemini_catalog if provider == "gemini" else _fetch_claude_catalog
+    fallback = M.gemini_fallback_models if provider == "gemini" else M.claude_fallback_models
+    try:
+        entry = await get_cached_models(provider, lambda: fetch(key))
