@@ -103,3 +103,18 @@ def _translate_response(c: Completion, body: dict, parsed: dict) -> dict:
 # ---- simple translate -----------------------------------------------------
 
 async def translate_gemini(body: dict) -> dict:
+    text, target, model = _s(body, "text"), _s(body, "targetLang"), _s(body, "model")
+    source = _s(body, "sourceLang") or "auto"
+    _require(bool(text.strip()), "Text to translate is required.")
+    _require(bool(target), "Target language is required.")
+    _require(bool(model), "Model selection is required.")
+    _check_languages(source, target)
+    _require(_key_ok(body), "A valid Gemini API key is required.")
+
+    requested = int(_num(body, "maxOutputTokens", 0))
+    try:
+        c = await gemini.generate(
+            _s(body, "apiKey"), model, pb.build_translation_system_prompt(source, target), text,
+            disable_safety=True, temperature=0.7, top_p=0.95,
+            max_output_tokens=requested if requested > 0 else M.GEMINI_DEFAULT_MAX_OUTPUT_TOKENS,
+        )
