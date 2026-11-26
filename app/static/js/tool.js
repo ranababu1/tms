@@ -133,3 +133,18 @@
   const targetSelect = $("target-select");
   const swapBtn = $("swap-btn");
 
+  function renderModelSelect() {
+    modelSelect.replaceChildren(
+      ...S.models.map((m) => el("option", { value: m.id, selected: m.id === S.model }, m.label))
+    );
+    const m = activeModel();
+    $("meta-in").textContent = `In: ${compact.format(m.inputTokenLimit)} tokens`;
+    $("meta-out").textContent = `Out: ${compact.format(m.outputTokenLimit)} tokens`;
+  }
+
+  function renderLanguageSelects() {
+    sourceSelect.replaceChildren(
+      ...cfg.languages.map((l) => el("option", { value: l.code, selected: l.code === S.source }, l.label))
+    );
+    targetSelect.replaceChildren(
+      ...cfg.languages.filter((l) => l.code !== "auto").map((l) =>
