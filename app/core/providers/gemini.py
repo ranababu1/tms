@@ -58,3 +58,18 @@ async def generate(
         **{k: v for k, v in params.items() if v is not None},
     )
     contents = [types.Content(role="user", parts=[types.Part(text=user)])]
+    try:
+        response = await _client(api_key).aio.models.generate_content(
+            model=model, contents=contents, config=config
+        )
+    except errors.APIError as exc:
+        raise ProviderError(exc.message or str(exc), exc.code) from None
+    except ProviderError:
+        raise
+    except Exception as exc:  # network errors, SDK validation errors
+        raise ProviderError(str(exc) or type(exc).__name__) from None
+
+    try:
+        text = response.text or ""
+    except (ValueError, AttributeError):
+        text = ""
