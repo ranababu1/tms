@@ -103,3 +103,18 @@ main.tool-main { padding: 28px 0 0; }
 .btn-accent { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
 .btn-translate {
   position: relative; overflow: hidden;
+  background: var(--accent); color: #0b0d12; border-color: var(--accent); font-weight: 600;
+  padding: 10px 18px;
+}
+.btn-translate:hover:not(:disabled) { color: #0b0d12; filter: brightness(1.08); }
+.btn-translate .kbd { font-size: 11px; opacity: .7; }
+.btn-translate-live::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .35) 50%, transparent 70%);
+  transform: translateX(-100%); animation: sweep 1.6s linear infinite;
+}
+@keyframes sweep { to { transform: translateX(100%); } }
+
+/* Form controls */
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.field-label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-faint); }
