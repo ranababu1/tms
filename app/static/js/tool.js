@@ -403,3 +403,18 @@
         ? el("button", { class: "btn btn-accent btn-sm", type: "button", onclick: () => {
             S.translatedText = res.correctedTranslation;
             S.review = { ...S.review, applied: true };
+            render();
+          } }, "Provide corrected version")
+        : null);
+  }
+
+  function outputView() {
+    if (S.loading) {
+      return loaderView("Translator Agent In Action", cfg.loadingMessages[S.msgIdx % cfg.loadingMessages.length]);
+    }
+    if (S.error) {
+      return el("div", { class: "error-box animate-fade-in" },
+        el("span", {}, S.error),
+        el("button", { class: "btn btn-sm", type: "button", onclick: () => handleTranslate(S.lastWithReview) }, "Try again"));
+    }
+    if (S.translatedText == null) {
