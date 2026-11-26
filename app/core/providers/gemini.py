@@ -28,3 +28,18 @@ def _client(api_key: str) -> genai.Client:
 
 
 def _finish_reason(response) -> str | None:
+    try:
+        reason = response.candidates[0].finish_reason
+    except (AttributeError, IndexError, TypeError):
+        return None
+    name = getattr(reason, "name", str(reason) if reason else None)
+    if name == "SAFETY":
+        return "safety"
+    if name == "MAX_TOKENS":
+        return "max_tokens"
+    return name
+
+
+async def generate(
+    api_key: str,
+    model: str,
