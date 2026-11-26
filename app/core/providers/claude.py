@@ -73,3 +73,7 @@ async def create_message(
         finish_reason="max_tokens" if stop == "max_tokens" else stop,
     )
 
+
+async def list_models(api_key: str) -> list[dict]:
+    data = await _request("GET", "/models", api_key, params={"limit": 1000})
+    return data.get("data") or []
