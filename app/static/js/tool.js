@@ -328,3 +328,18 @@
       class: "tab" + (S.panel === id ? " active" : ""),
       type: "button",
       onclick: () => { S.panel = id; render(); },
+    }, ...label);
+  }
+  function renderTabs() {
+    const tabs = [tabButton("input", "Input")];
+    if (S.draftText != null) tabs.push(tabButton("draft", "Draft"));
+    if (S.critiqueText != null) tabs.push(tabButton("critique", "Critique"));
+    for (const a of S.attempts) {
+      tabs.push(tabButton(`attempt-${a.n}`, `Attempt ${a.n} `,
+        a.allPassed ? el("span", { class: "ok" }, "✓") : el("span", { class: "bad" }, "✕")));
+    }
+    if (S.pending) {
+      const pend = tabButton("pending", `Attempt ${S.pending.n}`);
+      pend.classList.add("pending");
+      tabs.push(pend);
+    }
