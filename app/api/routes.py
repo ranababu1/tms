@@ -43,3 +43,15 @@ def _route(path: str, handler: Handler) -> None:
     endpoint.__name__ = "api_" + path.strip("/").replace("-", "_")
     router.add_api_route(path, endpoint, methods=["POST"])
 
+
+_route("/translate", services.translate_gemini)
+_route("/translate-claude", services.translate_claude)
+_route("/godmode", services.godmode_gemini)
+_route("/godmode-claude", services.godmode_claude)
+_route("/review-translation", services.review_gemini)
+_route("/verify-translation", lambda b: services.verify("gemini", b))
+_route("/verify-translation-claude", lambda b: services.verify("claude", b))
+_route("/fix-translation", lambda b: services.fix("gemini", b))
+_route("/fix-translation-claude", lambda b: services.fix("claude", b))
+_route("/models", lambda b: services.model_catalog("gemini", b))
+_route("/claude-models", lambda b: services.model_catalog("claude", b))
