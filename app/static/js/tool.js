@@ -568,3 +568,18 @@
       }
     }, 1500);
   }
+  function stopMessages() { if (msgTimer) clearInterval(msgTimer); msgTimer = null; }
+
+  function resetResults() {
+    Object.assign(S, {
+      error: null, translatedText: null, draftText: null, critiqueText: null, outputTokens: null,
+      attempts: [], pending: null, retryError: null, review: { state: "idle" }, currentCost: 0,
+    });
+  }
+
+  async function handleTranslate(withReview) {
+    if (S.busy) return;
+    S.lastWithReview = withReview;
+    resetResults();
+    S.panel = "output";
+    if (S.apiKey.trim().length < 10) { S.error = cfg.noKeyError; render(); return; }
