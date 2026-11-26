@@ -103,3 +103,18 @@ def test_gemini_translate_safety_and_empty(monkeypatch):
     r = post("/api/translate", body)
     assert r.status_code == 500 and r.json()["error"] == "quota exceeded"
 
+
+def test_claude_translate_params_and_error_mapping(monkeypatch):
+    calls = []
+    monkeypatch.setattr(services.claude, "create_message", fake("no tags here", calls=calls))
+    body = {"text": "x", "targetLang": "de", "model": "claude-haiku-4-5", "apiKey": KEY, "maxOutputTokens": 999999}
+    r = post("/api/translate-claude", body)
+    assert r.json()["translatedText"] == "no tags here" and r.json()["draftText"] is None
+    args, kw = calls[0]["args"], calls[0]["kwargs"]
+    assert args[4] == 128000 and kw == {"temperature": 0.7, "top_k": 100}
+
+    calls.clear()
+    post("/api/translate-claude", {**body, "model": "claude-sonnet-5", "maxOutputTokens": 0})
+    assert calls[0]["args"][4] == 64000 and calls[0]["kwargs"] == {}
+
+    for status, fragment in [(401, "Invalid API key"), (403, "Access denied"), (429, "Rate limit"), (404, "not found")]:
