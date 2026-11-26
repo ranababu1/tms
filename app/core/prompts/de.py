@@ -88,3 +88,18 @@ Non-negotiable — use exactly as listed, every time, no paraphrasing.
 - Forbidden: opening with "Man" when a direct CTA is possible. "Man kann" is weak/impersonal — use "Du kannst" or an imperative: "Erstelle jetzt deine erste Kampagne".
 - Verb forms must be exact: "Schau dir an", "Startet eure Kampagne", "Vernetzte deine Kanäle".
 
+### Handling anglicisms — the "trust" signal
+- Acceptable, established spellings: "Push-Benachrichtigung", "E‑Mail‑Kampagne", "Customer Engagement", "Retention", "Dashboard", "Workflow", "Reporting".
+- Avoid lazy Denglisch verbs: "engagen", "onboarden", "triggern" → prefer "einbinden", "integrieren", "einrichten", "auslösen". (Noun "Onboarding" is fine.)
+- Exception: "Targeting" is widely accepted and often better than the dated "Zielgruppenansprache" — use "Targeting" or "Zielgruppen-Targeting".
+
+### Sentence starts — break monotony
+- Avoid starting consecutive sentences with the same word (especially "CleverTap", "Die Plattform", "Du", "So").
+- Vary openings: a verb, a time element ("Ab sofort…"), a conditional ("Wenn du…"), or the benefit ("Mehr Umsatz…").
+
+## GUIDED EXAMPLE
+English source: "By unifying customer data across all channels, CleverTap helps you deliver real‑time, personalised messages that drive engagement and retention."
+
+❌ Literal/unnatural: "Nach der Vereinigung von Kundendaten über alle Kanäle hilft CleverTap Ihnen, Echtzeit‑personalisierte Nachrichten zu liefern, die Engagement und Retention antreiben."
+
+✅ Natural/idiomatic: "Führe alle deine Kundendaten kanalübergreifend zusammen. So sendest du personalisierte Nachrichten in Echtzeit – das steigert Interaktionen und bindet Kunden langfristig."
