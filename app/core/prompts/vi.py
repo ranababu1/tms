@@ -118,3 +118,18 @@ Work through each check below. Mark each PASS or FAIL with a one-line note.
 2. Noun classifiers used correctly wherever required?
 3. No passive "được" constructions where active voice is natural?
 4. All sentences under 20 words, breaking long English clauses?
+5. No literal rendering of "at scale", "seamless", "actionable insights", "end-to-end"?
+6. "bạn" used consistently — no mixing with "anh/chị", "quý vị", or impersonal forms?
+7. Locked glossary terms used exactly as specified?
+8. Reads as natively written Vietnamese, not as a translation — no "translationese" phrasing anywhere?
+9. Grammar, word order, and punctuation fully correct?
+10. Tone matches the source's intent — confident and approachable, neither stiff nor overly casual?
+11. No redundant, filler, or repeated phrasing — every sentence earns its place?
+12. CTAs are punchy, benefit-driven, and natural — not literal English translations?
+13. No leftover untranslated English text (except intentional brand/product names or accepted borrowings like "email")?
+14. No overly formal bureaucratic openers ("Kính thưa quý khách", "Trân trọng kính mời") slipping in?
+15. Persuasive intent and meaning fully preserved — nothing lost, added, or softened from the source?
+</critique>
+
+<final>
+Rewrite the translation, correcting every FAIL item from your critique. This is the only section shown to the user — make it perfect.
