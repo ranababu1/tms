@@ -43,3 +43,18 @@ app/
   api/routes.py        the 11 POST /api/* endpoints ({"error": "..."} on failure)
   core/
     prompts/           verbatim de/tr/vi prompts + shared prompt strings
+    prompt_builder.py  translation / verify / fix / review / God Mode prompts
+    parsing.py         <draft>/<critique>/<final> tags, tolerant JSON
+    models.py          catalogs, pricing, limits, Claude capability gates
+    cache.py           7-day model cache (memory + .cache/*.json)
+    services.py        provider-agnostic operations and exact error strings
+    providers/         Gemini (google-genai) and Claude (httpx) clients
+  templates/           landing + one parameterised tool page
+  static/              app.css, tool.js, constellation.js
+tests/                 core unit tests + API contract tests
+```
+
+## API
+
+| Endpoint | Purpose |
+|---|---|
