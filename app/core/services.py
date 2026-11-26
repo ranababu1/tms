@@ -73,3 +73,18 @@ def _claude_translate_error(exc: ProviderError, model: str) -> ServiceError:
 def _claude_godmode_error(exc: ProviderError, model: str) -> ServiceError:
     mapped = {
         401: "Invalid API key.",
+        429: "Rate limit exceeded. Please wait and try again.",
+        404: f'Model "{model}" not found.',
+    }
+    if exc.status in mapped:
+        return ServiceError(exc.status, mapped[exc.status])
+    return ServiceError(500, exc.message or f"Anthropic API error: {exc.status}")
+
+
+def _claude_sampling(model: str, temperature: float, top_k: int | None = None) -> dict:
+    if not M.supports_sampling_params(model):
+        return {}
+    params: dict[str, Any] = {"temperature": temperature}
+    if top_k is not None:
+        params["top_k"] = top_k
+    return params
