@@ -133,3 +133,15 @@
 <!-- Model info modal -->
 <div class="modal-backdrop hidden" id="model-modal" role="dialog" aria-modal="true" aria-labelledby="model-modal-title">
   <div class="glass-card modal wide">
+    <div class="modal-head">
+      <h2 id="model-modal-title">Models and pricing</h2>
+      <button class="btn btn-sm" id="model-modal-close" type="button">Close</button>
+    </div>
+    <div class="table-wrap" id="model-table"></div>
+    <p class="modal-note" id="model-modal-footer"></p>
+  </div>
+</div>
+
+<script type="application/json" id="page-config">{{ cfg | tojson }}</script>
+{% endblock %}
+{% block scripts %}<script src="/static/js/tool.js" defer></script>{% endblock %}
