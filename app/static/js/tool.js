@@ -73,3 +73,18 @@
     loading: false,
     msgIdx: 0,
     error: null,
+    lastWithReview: false,
+    translatedText: null,
+    draftText: null,
+    critiqueText: null,
+    outputTokens: null,
+    attempts: [],
+    pending: null, // {n, kind: "verify"|"fix"}
+    retryError: null,
+    review: { state: "idle" }, // idle | waiting | running | done | error
+    currentCost: 0,
+    sessionCost: 0,
+    copied: false,
+    god: null,
+  };
+  if (!LANG_NAMES[S.target] || S.target === "auto") S.target = "tr";
