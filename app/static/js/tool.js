@@ -448,3 +448,18 @@
         el("div", { class: "error-box" }, el("span", {}, a.error)));
     }
     return el("div", { class: "animate-fade-in" },
+      el("div", { class: "banner " + (a.allPassed ? "ok" : "bad") },
+        a.allPassed
+          ? `Attempt ${n} of ${L.maxAttempts} — all checks passed on independent review.`
+          : `Attempt ${n} of ${L.maxAttempts} — some checks did not pass on independent review.`),
+      el("ul", { class: "check-list" }, a.results.map((r, idx) =>
+        el("li", {},
+          el("span", { class: r.pass ? "mark-ok" : "mark-bad" }, r.pass ? "✓" : "✕"),
+          el("span", {}, a.checklist[idx] || `Check ${r.item}`,
+            r.note ? el("div", { class: "note" }, r.note) : null)))),
+      el("div", { class: "field-label", style: "margin-bottom:6px" }, "Text graded in this attempt"),
+      el("pre", { class: "output-block" }, el("code", {}, a.translatedText)));
+  }
+
+  function pendingView() {
+    if (!S.pending) return el("p", { class: "muted" }, "No verification in progress.");
