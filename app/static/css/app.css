@@ -133,3 +133,18 @@ main.tool-main { padding: 28px 0 0; }
 .textarea { resize: vertical; line-height: 1.6; }
 
 /* Controls row */
+.controls-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: end; }
+.model-row { display: flex; gap: 8px; align-items: center; }
+.model-row .select { flex: 1; min-width: 0; }
+.swap-btn { height: 40px; width: 40px; padding: 0; }
+@media (max-width: 760px) {
+  .controls-grid { grid-template-columns: 1fr auto 1fr; }
+  .controls-grid .model-field { grid-column: 1 / -1; }
+}
+
+/* Token-meta marquee (CSS-only, exactly 3 items + 3 keyframe stops) */
+.token-meta-slider {
+  height: 22px; overflow: hidden; cursor: pointer; border: 1px solid var(--border-default);
+  border-radius: 8px; padding: 0 8px; background: var(--surface-input); font-size: 11px;
+  color: var(--text-muted); flex-shrink: 0; min-width: 132px;
+}
