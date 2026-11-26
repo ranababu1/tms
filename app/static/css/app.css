@@ -268,3 +268,18 @@ main.tool-main { padding: 28px 0 0; }
 .modal h2 { margin: 0; font-size: 16px; color: var(--text-primary); }
 .modal-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
 .pill { font-size: 11px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent); background: var(--accent-soft); }
+.key-row { display: flex; gap: 8px; }
+.key-row .input { flex: 1; min-width: 0; }
+.modal-note { font-size: 12px; color: var(--text-faint); margin: 10px 0 0; }
+.checkbox-row { display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; cursor: pointer; }
+.checkbox-row input { margin-top: 3px; accent-color: var(--accent); }
+.modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 18px; }
+.table-wrap { overflow-x: auto; }
+table.models { width: 100%; border-collapse: collapse; font-size: 12px; }
+table.models th, table.models td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--border-default); white-space: nowrap; }
+table.models th { color: var(--text-faint); font-weight: 500; text-transform: uppercase; font-size: 10.5px; letter-spacing: .06em; }
+table.models tr.selected td { background: var(--accent-soft); }
+.tag { font-size: 10px; padding: 1px 6px; border-radius: 6px; border: 1px solid var(--border-default); color: var(--text-muted); margin-left: 6px; }
+.tag.sel { border-color: var(--accent); color: var(--accent); }
+
+/* Landing */
