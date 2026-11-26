@@ -373,3 +373,7 @@ async def model_catalog(provider: str, body: dict) -> dict:
     fallback = M.gemini_fallback_models if provider == "gemini" else M.claude_fallback_models
     try:
         entry = await get_cached_models(provider, lambda: fetch(key))
+        fetched_ms = int(entry["fetchedAt"] * 1000)  # JS-friendly epoch milliseconds
+        return {"models": entry["models"], "fetchedAt": fetched_ms, "fallback": False}
+    except Exception:
+        return {"models": fallback(), "fetchedAt": None, "fallback": True}
