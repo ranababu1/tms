@@ -358,3 +358,18 @@
           el("div", { class: "ai-orb-ring" }), el("div", { class: "ai-orb-ring r2" }), el("div", { class: "ai-orb-core" })),
         el("p", { class: "translation-wow-title loading-text-shimmer" }, title),
         el("div", { class: "translation-message-rail" },
+          el("div", { class: "translation-message-text", id: "loading-message" }, message)),
+        el("div", { class: "ai-progress-track" }, el("div", { class: "ai-progress-fill" }))));
+  }
+
+  async function copyText(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const ta = el("textarea", { style: "position:fixed;opacity:0" });
+      ta.value = text;
+      document.body.append(ta);
+      ta.select();
+      try { document.execCommand("copy"); } catch { /* ignore */ }
+      ta.remove();
+    }
