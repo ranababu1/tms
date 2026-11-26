@@ -133,3 +133,18 @@ async def translate_claude(body: dict) -> dict:
     _require(bool(text.strip()), "Text to translate is required.")
     _require(bool(target), "Target language is required.")
     _require(bool(_s(body, "apiKey").strip()), "API key is required.")
+    _require(bool(model), "Model selection is required.")
+    _require(M.is_allowed_claude_model(model), "Invalid model selection.")
+    _require(_key_ok(body), "Invalid API key format.")
+    _check_languages(source, target)
+
+    requested = int(_num(body, "maxOutputTokens", 0))
+    max_tokens = (
+        min(requested, M.CLAUDE_GODMODE_MAX_OUTPUT_CAP) if requested > 0
+        else M.CLAUDE_DEFAULT_MAX_OUTPUT_TOKENS
+    )
+    try:
+        c = await claude.create_message(
+            _s(body, "apiKey"), model, pb.build_translation_system_prompt(source, target), text,
+            max_tokens, **_claude_sampling(model, 0.7, 100),
+        )
