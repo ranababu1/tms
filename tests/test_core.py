@@ -88,3 +88,18 @@ def test_normalize_verification():
     out = parsing.normalize_verification(parsed, checklist)
     assert out["results"] == [{"item": 1, "pass": True, "note": "ok"}, {"item": 2, "pass": False, "note": ""}]
     assert out["allPassed"] is False
+    assert parsing.normalize_verification({"results": [{"pass": True}], "allPassed": True}, checklist)["allPassed"]
+    assert parsing.normalize_verification(None, checklist) == {"results": [], "allPassed": False}
+
+
+def test_normalize_review():
+    out = parsing.normalize_review({"hasIssues": True, "issues": ["x", 3] + ["y"] * 10, "correctedTranslation": "  "})
+    assert out["issues"] == ["x"] + ["y"] * 7 and out["correctedTranslation"] is None
+    assert parsing.normalize_review("garbage")["issues"] == ["Review parsing failed. Raw review returned."]
+
+
+# ---- capability gates and catalogs ----------------------------------------
+
+def test_claude_gates():
+    assert M.is_allowed_claude_model("claude-sonnet-5")
+    assert M.is_allowed_claude_model("CLAUDE-HAIKU-4-5")
