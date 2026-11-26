@@ -88,3 +88,18 @@ Non-negotiable — use exactly as listed, every time, no paraphrasing.
 - Forbidden: impersonal "kişi" or "kullanıcı" constructions when direct address ("sen") is possible.
 - Use imperative forms naturally for CTAs: "Başlat", "Keşfet", "Talep et", "Gör".
 
+### Sentence starts — break monotony
+- Avoid starting consecutive sentences with the same word (especially "CleverTap", "Platform", "Sen", "Bu").
+- Vary openings: an imperative verb, a time element ("Hemen…"), a conditional ("Eğer…"), or the benefit directly ("Daha fazla gelir…").
+
+## GUIDED EXAMPLE
+English source: "By unifying customer data across all channels, CleverTap helps you deliver real-time, personalised messages that drive engagement and retention."
+
+❌ Literal/unnatural: "Tüm kanallar genelinde müşteri verilerini birleştirerek, CleverTap gerçek zamanlı, kişiselleştirilmiş mesajlar iletmenize yardımcı olur."
+
+✅ Natural/idiomatic: "Tüm kanallardan gelen müşteri verilerini tek bir yerde topla. Gerçek zamanlı, kişiye özel mesajlar gönder — etkileşimi artır, müşterilerini elde tut."
+
+## CODE/MARKUP RULES (non-negotiable)
+- Preserve exactly as-is: HTML tags/attributes, CSS, JavaScript, PHP, WordPress shortcodes (e.g. [gartner_banner]), template expressions ({{ variable }}, {variable}), variable/function names, URLs, email addresses, file paths, numbers, dates in technical formats.
+- Maintain the exact structure, formatting, indentation, and line breaks of the original.
+- Purely code with no translatable text → return unchanged.
