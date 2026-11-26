@@ -148,3 +148,18 @@ def test_gemini_godmode_clamps(monkeypatch):
 
 def test_claude_godmode_gates(monkeypatch):
     calls = []
+    monkeypatch.setattr(services.claude, "create_message", fake("ok", calls=calls))
+    body = {"text": "x", "targetLang": "de", "apiKey": KEY, "systemPrompt": "p",
+            "temperature": 0.4, "topK": 900, "maxOutputTokens": 0, "effort": "max"}
+    post("/api/godmode-claude", {**body, "model": "claude-opus-5-5"})
+    assert calls[0]["args"][4] == 1 and calls[0]["kwargs"] == {"effort": "max"}
+    calls.clear()
+    post("/api/godmode-claude", {**body, "model": "claude-haiku-4-5"})
+    assert calls[0]["kwargs"] == {"temperature": 0.4, "top_k": 500}
+    r = post("/api/godmode-claude", {**body, "apiKey": "x", "model": "claude-haiku-4-5"})
+    assert r.json()["error"] == "Invalid or missing API key."
+
+
+# ---- verify / fix / review ------------------------------------------------
+
+VERIFY_BODY = {"originalText": "o", "translatedText": "t", "targetLang": "de", "model": "claude-haiku-4-5", "apiKey": KEY}
