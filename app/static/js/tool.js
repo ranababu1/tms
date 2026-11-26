@@ -463,3 +463,18 @@
 
   function pendingView() {
     if (!S.pending) return el("p", { class: "muted" }, "No verification in progress.");
+    const msg = S.pending.kind === "verify"
+      ? `Running verification for attempt ${S.pending.n}...`
+      : `Fixing failing checks for attempt ${S.pending.n}...`;
+    return loaderView(msg, "Independent reviewer at work");
+  }
+
+  function renderPanel() {
+    const inputPanel = $("panel-input");
+    const dyn = $("panel-dynamic");
+    inputPanel.classList.toggle("hidden", S.panel !== "input");
+    dyn.classList.toggle("hidden", S.panel === "input");
+    if (S.panel === "input") return;
+    let view;
+    if (S.panel === "output") view = outputView();
+    else if (S.panel === "draft") view = el("pre", { class: "output-block" }, el("code", {}, S.draftText || ""));
