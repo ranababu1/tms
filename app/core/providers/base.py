@@ -13,3 +13,18 @@ class Usage:
     totalTokens: int = 0
 
     def as_dict(self) -> dict:
+        return {
+            "inputTokens": self.inputTokens,
+            "outputTokens": self.outputTokens,
+            "totalTokens": self.totalTokens,
+        }
+
+
+@dataclass
+class Completion:
+    text: str
+    usage: Usage = field(default_factory=Usage)
+    # Normalised stop reason: "safety", "max_tokens", "stop" or the raw provider value.
+    finish_reason: str | None = None
+
+
