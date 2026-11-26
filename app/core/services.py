@@ -13,3 +13,18 @@ from . import parsing
 from . import prompt_builder as pb
 from .cache import get_cached_models
 from .languages import language_name
+from .providers import claude, gemini
+from .providers.base import Completion, ProviderError
+
+
+class ServiceError(Exception):
+    def __init__(self, status: int, message: str):
+        super().__init__(message)
+        self.status = status
+        self.message = message
+
+
+# ---- body helpers ---------------------------------------------------------
+
+def _s(body: dict, key: str) -> str:
+    value = body.get(key)
