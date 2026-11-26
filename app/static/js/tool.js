@@ -343,3 +343,18 @@
       pend.classList.add("pending");
       tabs.push(pend);
     }
+    tabs.push(tabButton("output", "Output"));
+    $("tabs").replaceChildren(...tabs);
+  }
+  function renderCost() {
+    $("cost-display").textContent = `Current: ${usd2(S.currentCost)} · Session: ${usd2(S.sessionCost)}`;
+  }
+
+  // ---------- panels ----------
+  function loaderView(title, message) {
+    return el("div", { class: "translation-wow animate-fade-in" },
+      el("div", { class: "translation-wow-card" },
+        el("div", { class: "ai-orb" },
+          el("div", { class: "ai-orb-ring" }), el("div", { class: "ai-orb-ring r2" }), el("div", { class: "ai-orb-core" })),
+        el("p", { class: "translation-wow-title loading-text-shimmer" }, title),
+        el("div", { class: "translation-message-rail" },
