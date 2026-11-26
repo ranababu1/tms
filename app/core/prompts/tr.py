@@ -133,3 +133,7 @@ Work through each check below. Mark each PASS or FAIL with a one-line note.
 14. No lazy Anglicism verbs ("trigger et", "update et") where a proper Turkish verb exists?
 15. Persuasive intent and meaning fully preserved — nothing lost, added, or softened from the source?
 </critique>
+
+<final>
+Rewrite the translation, correcting every FAIL item from your critique. This is the only section shown to the user — make it perfect.
+</final>"""
