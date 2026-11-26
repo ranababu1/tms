@@ -73,3 +73,18 @@
       const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 6);
       glow.addColorStop(0, `hsla(${p.hue}, 95%, 70%, ${0.35 * twinkle})`);
       glow.addColorStop(1, `hsla(${p.hue}, 95%, 70%, 0)`);
+      ctx.fillStyle = glow;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 6, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = `hsla(${p.hue}, 100%, 88%, ${0.9 * twinkle})`;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+    }
+
+    if (mouse.active) {
+      const halo = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 90);
+      halo.addColorStop(0, "rgba(167, 139, 250, 0.18)");
+      halo.addColorStop(1, "rgba(167, 139, 250, 0)");
+      ctx.fillStyle = halo;
+      ctx.beginPath(); ctx.arc(mouse.x, mouse.y, 90, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.globalCompositeOperation = "source-over";
+    raf = requestAnimationFrame(step);
