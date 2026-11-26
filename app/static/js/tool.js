@@ -88,3 +88,18 @@
     god: null,
   };
   if (!LANG_NAMES[S.target] || S.target === "auto") S.target = "tr";
+  if (!S.models.some((m) => m.id === S.model)) S.model = S.models[0].id;
+
+  const activeModel = () => S.models.find((m) => m.id === S.model) || S.models[0];
+  const modelOutputLimit = () => activeModel().outputTokenLimit || (isClaude ? L.claudeDefaultMaxTokens : L.geminiDefaultMaxTokens);
+  const godMaxCap = () => Math.min(modelOutputLimit(), isClaude ? L.claudeMaxCap : L.geminiMaxCap);
+  const supportsSampling = () => !/^claude-(opus|sonnet)-5/i.test(S.model);
+  const supportsEffort = () => /^claude-(opus|sonnet)-5/i.test(S.model);
+
+  function addUsage(usage) {
+    if (!usage) return;
+    const p = activeModel().pricing;
+    const cost = (usage.inputTokens / 1e6) * p.inputPer1M + (usage.outputTokens / 1e6) * p.outputPer1M;
+    S.currentCost += cost;
+    S.sessionCost += cost;
+    const tag = isGod ? "[God Mode]" : isClaude ? "[Claude]" : "[Gemini]";
