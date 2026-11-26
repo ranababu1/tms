@@ -613,3 +613,18 @@
       S.review = { state: "waiting" }; render();
       await sleep(L.reviewDelayMs);
       S.review = { state: "running" }; render();
+      try {
+        const r = await postJSON(cfg.endpoints.review, {
+          originalText: input.value, translatedText: finalText,
+          targetLang: LANG_NAMES[S.target] || S.target, model: S.model, apiKey: S.apiKey,
+        });
+        addUsage(r.usage);
+        S.review = { state: "done", result: r };
+      } catch (e) {
+        S.review = { state: "error", error: e.message };
+      }
+    }
+    S.busy = false; S.phase = null;
+    render();
+  }
+
