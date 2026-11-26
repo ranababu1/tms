@@ -433,3 +433,18 @@
         el("span", { class: "header-actions" },
           el("button", { class: "btn btn-sm", type: "button", onclick: () => copyText(S.translatedText) },
             S.copied ? "Copied!" : "Copy"),
+          el("button", { class: "btn btn-sm", type: "button", disabled: S.busy || null, onclick: newTranslation }, "New Translation"))),
+      el("pre", { class: "output-block" }, el("code", {}, S.translatedText)),
+      S.retryError && !S.panel.startsWith("attempt") ? el("p", { class: "modal-note" }, "Verification stopped: " + S.retryError) : null,
+      reviewView());
+  }
+
+  function attemptView(n) {
+    const a = S.attempts.find((x) => x.n === n);
+    if (!a) return el("p", { class: "muted" }, "Attempt not found.");
+    if (a.error) {
+      return el("div", {},
+        el("div", { class: "banner bad" }, `Attempt ${n} of ${L.maxAttempts} — verification could not complete.`),
+        el("div", { class: "error-box" }, el("span", {}, a.error)));
+    }
+    return el("div", { class: "animate-fade-in" },
