@@ -43,3 +43,18 @@ def _store(name: str, models: list[dict]) -> dict:
 
 
 async def get_cached_models(name: str, fetch: Callable[[], Awaitable[list[dict]]]) -> dict:
+    """Return {"models", "fetchedAt"} — fresh cache, else refetch, else stale cache."""
+    entry = _load(name)
+    if entry and time.time() - entry["fetchedAt"] < CACHE_TTL_SECONDS:
+        return entry
+    try:
+        models = await fetch()
+        if not models:
+            raise ValueError("Provider returned no models.")
+        return _store(name, models)
+    except Exception:
+        if entry:
+            return entry
+        raise
+
+
