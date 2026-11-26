@@ -538,3 +538,18 @@
         .map(({ r, idx }) => ({ description: v.checklist[idx], note: r.note }));
       if (!failing.length) break;
       S.pending = { n: attempt + 1, kind: "fix" };
+      render();
+      try {
+        const f = await postJSON(cfg.endpoints.fix, { ...common, currentTranslation: current, failingChecks: failing });
+        addUsage(f.usage);
+        current = f.translatedText;
+        S.translatedText = current; // Output tab always shows the latest text
+      } catch (e) {
+        S.retryError = e.message;
+        break;
+      }
+      attempt += 1;
+    }
+    S.pending = null;
+    render();
+    return current;
