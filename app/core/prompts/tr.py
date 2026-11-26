@@ -58,3 +58,18 @@ Non-negotiable — use exactly as listed, every time, no paraphrasing.
 
 ### Avoid bureaucratic constructions
 - ❌ "-mek suretiyle" (by means of doing) → use direct verb forms.
+- ❌ "-mesi amacıyla" (for the purpose of) → rewrite with direct phrasing.
+- ❌ "söz konusu" (the aforementioned) → use specific nouns directly.
+- Replace these with clean, modern marketing Turkish.
+
+### List introductions — vary, benefit-oriented
+- Never repeat the same intro. Forbidden: "İşte özellikler:", "CleverTap şunları sunar:".
+- Rotate benefit-focused intros: "Avantajlarına bir bakış:" / "Neler elde edersin:" / "Bunu başarabilirsin:" / "Tek platformda:" — or skip the lead-in and start bullets directly.
+
+### Technical terms — consistency & cleanliness
+- First use: widely-known English tech term, Turkish equivalent in parentheses only if uncommon. Trust the expert audience.
+- Correct spelling: "E-posta" (not "email"/"e-mail"), "anlık bildirim", "müşteri etkileşimi".
+- Acceptable Anglicisms: "segment", "otomasyon", "platform", "analytics", "kampanya" — use established Turkish spellings.
+- Avoid lazy Anglicisms when good Turkish equivalents exist: "tetikle" over "trigger et", "analiz et" over "analyze et".
+
+### Forbidden patterns ("translationese" blacklist)
