@@ -1,0 +1,15 @@
+/* Dark-only theme. Accent switches per page via body[data-accent]. */
+:root {
+  --accent-glow: #22d3ee;
+  --accent-warm: #f472b6;
+  --surface-base: #0f1117;
+  --surface-card: #181a24;
+  --surface-input: #12141c;
+  --surface-raised: #13151e;
+  --border-default: #2a2d3a;
+  --text-primary: #e5e7eb;
+  --text-body: #d1d5db;
+  --text-muted: #9ca3af;
+  --text-faint: #6b7280;
+  --ok: #34d399;
+  --warn: #fbbf24;
