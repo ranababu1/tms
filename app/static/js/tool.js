@@ -553,3 +553,18 @@
     S.pending = null;
     render();
     return current;
+  }
+
+  let msgTimer = null;
+  function startMessages() {
+    S.msgIdx = 0;
+    stopMessages();
+    msgTimer = setInterval(() => {
+      S.msgIdx += 1;
+      const node = $("loading-message");
+      if (node && S.loading) {
+        node.textContent = cfg.loadingMessages[S.msgIdx % cfg.loadingMessages.length];
+        node.style.animation = "none"; void node.offsetWidth; node.style.animation = "";
+      }
+    }, 1500);
+  }
