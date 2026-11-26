@@ -103,3 +103,15 @@ def page_config(provider: str, mode: str) -> dict:
             {l["code"]: get_prompt_template_for_lang(l["code"]) for l in UI_LANGUAGES if l["code"] != "auto"}
             if mode == "god" else None
         ),
+        "loadingMessages": loading,
+        "limits": {
+            "maxAttempts": 5,
+            "reviewDelayMs": 5000,
+            "geminiDefaultMaxTokens": M.GEMINI_DEFAULT_MAX_OUTPUT_TOKENS,
+            "geminiMaxCap": M.GEMINI_GODMODE_MAX_OUTPUT_CAP,
+            "claudeDefaultMaxTokens": M.CLAUDE_DEFAULT_MAX_OUTPUT_TOKENS,
+            "claudeMaxCap": M.CLAUDE_GODMODE_MAX_OUTPUT_CAP,
+            "effortLevels": list(M.CLAUDE_EFFORT_LEVELS),
+            "thinkingLevels": list(M.GEMINI_THINKING_LEVELS),
+        },
+    }
