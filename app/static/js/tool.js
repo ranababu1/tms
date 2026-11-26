@@ -508,3 +508,18 @@
     const body = { ...base, systemPrompt, temperature: g.temperature, topP: g.topP, topK: g.topK,
       maxOutputTokens: g.maxTokens, presencePenalty: g.presencePenalty,
       frequencyPenalty: g.frequencyPenalty, thinkingLevel: g.thinkingLevel };
+    const seed = Number.parseInt(g.seed, 10);
+    if (g.seed !== "" && Number.isFinite(seed) && seed >= 0) body.seed = seed;
+    return body;
+  }
+
+  async function runVerificationLoop(finalText) {
+    if (isGod || !S.verifyEnabled || !cfg.endpoints.verify) return finalText;
+    let attempt = 1;
+    let current = finalText;
+    const common = { originalText: input.value, targetLang: S.target, model: S.model, apiKey: S.apiKey };
+    for (;;) {
+      S.pending = { n: attempt, kind: "verify" };
+      render();
+      let v;
+      try {
