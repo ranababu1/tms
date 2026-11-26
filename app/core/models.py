@@ -88,3 +88,18 @@ def supports_sampling_params(model_id: str) -> bool:
     """Opus/Sonnet 5.x reject temperature/top_k."""
     return not _GEN5_RE.match(model_id or "")
 
+
+def supports_effort(model_id: str) -> bool:
+    return bool(_GEN5_RE.match(model_id or ""))
+
+
+def claude_family(model_id: str) -> str | None:
+    m = _FAMILY_RE.search(model_id or "")
+    return m.group(0).lower() if m else None
+
+
+def title_case_id(model_id: str) -> str:
+    return " ".join(part.capitalize() for part in model_id.split("-"))
+
+
+def claude_model(model_id: str, label: str | None = None) -> dict:
