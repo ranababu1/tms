@@ -43,3 +43,18 @@ Non-negotiable — use exactly as listed, every time, no paraphrasing.
 - Vietnamese sentences are naturally compact. Break long English sentences — especially those with multiple embedded clauses — into shorter Vietnamese ones.
 - Max 20 words/sentence, natural flowing rhythm.
 - Structure is generally SVO, but topic-comment structures are common and natural — use them to front-load the benefit.
+
+### Tones & diacritics — accuracy is non-negotiable
+- Every word must carry correct diacritical marks (tone marks and vowel modifiers). Missing or wrong tones change the word entirely and signal machine output to native readers.
+  ❌ "ban" (means "friend" without tones — wrong) → ✅ "bạn"
+- Double-check all tonal marks before finalizing.
+
+### Noun classifiers
+- Vietnamese requires appropriate noun classifiers (từ loại) — do not omit them.
+  "Một nền tảng" (a platform), "một chiến dịch" (a campaign), "một báo cáo" (a report).
+- Omitting classifiers sounds unnatural and marks the text as non-native.
+
+### Active voice (mandatory)
+- Prefer active constructions. Passive "được + verb" is used sparingly in natural marketing copy.
+  ❌ "Dữ liệu được thu thập và phân tích bởi CleverTap."
+  ✅ "CleverTap thu thập và phân tích dữ liệu của bạn." / "Thu thập và phân tích dữ liệu — tất cả trong một nền tảng."
