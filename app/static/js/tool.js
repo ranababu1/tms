@@ -193,3 +193,18 @@
     if (key.length < 10 || S.fetchedForKey === key) return;
     S.fetchedForKey = key;
     try {
+      const data = await postJSON(cfg.endpoints.models, { apiKey: key });
+      if (data && Array.isArray(data.models) && data.models.length) {
+        S.models = data.models;
+        S.fetchedAt = data.fetchedAt;
+        S.catalogFallback = !!data.fallback;
+        if (!S.models.some((m) => m.id === S.model)) S.model = S.models[0].id;
+        if (isGod) S.god.maxTokens = clamp(S.god.maxTokens, 1, godMaxCap());
+        renderModelSelect();
+        renderGodControls();
+      }
+    } catch { /* keep the fallback list */ }
+  }
+
+  // ---------- God Mode controls ----------
+  function godControlSpecs() {
