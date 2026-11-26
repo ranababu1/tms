@@ -88,3 +88,18 @@
     }
     ctx.globalCompositeOperation = "source-over";
     raf = requestAnimationFrame(step);
+  }
+
+  const host = canvas.parentElement;
+  host.addEventListener("pointermove", (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left; mouse.y = e.clientY - rect.top; mouse.active = true;
+  });
+  host.addEventListener("pointerleave", () => { mouse.active = false; });
+  window.addEventListener("resize", resize);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) cancelAnimationFrame(raf); else raf = requestAnimationFrame(step);
+  });
+  resize();
+  raf = requestAnimationFrame(step);
+})();
