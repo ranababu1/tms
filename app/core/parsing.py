@@ -43,3 +43,18 @@ def parse_json_tolerant(raw: str) -> Any | None:
         return None
 
 
+def normalize_verification(parsed: Any, checklist: list[str]) -> dict:
+    """Shape a verifier reply into {results, allPassed}; results sliced to the checklist."""
+    if not isinstance(parsed, dict) or not isinstance(parsed.get("results"), list):
+        return {"results": [], "allPassed": False}
+    results = []
+    for idx, r in enumerate(parsed["results"][: len(checklist)]):
+        r = r if isinstance(r, dict) else {}
+        note = r.get("note")
+        results.append({
+            "item": r.get("item", idx + 1),
+            "pass": bool(r.get("pass")),
+            "note": note if isinstance(note, str) else "",
+        })
+    model_flag = parsed.get("allPassed")
+    if isinstance(model_flag, bool):
