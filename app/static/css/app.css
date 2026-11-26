@@ -118,3 +118,18 @@ main.tool-main { padding: 28px 0 0; }
 /* Form controls */
 .field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .field-label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-faint); }
+.select, .input, .textarea {
+  width: 100%; background: var(--surface-input); border: 1px solid var(--border-default);
+  border-radius: 10px; padding: 9px 12px; color: var(--text-primary); outline: none;
+}
+.select:focus, .input:focus, .textarea:focus { border-color: var(--accent); }
+.select {
+  appearance: none; padding-right: 34px; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center;
+}
+.select option { background: var(--surface-card); color: var(--text-primary); }
+.select option.no-prompt { color: var(--violet); }
+.textarea { resize: vertical; line-height: 1.6; }
+
+/* Controls row */
