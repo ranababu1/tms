@@ -133,3 +133,18 @@ def test_gemini_godmode_clamps(monkeypatch):
     monkeypatch.setattr(services.gemini, "generate", fake(" out ", calls=calls))
     r = post("/api/godmode", {
         "text": "x", "sourceLang": "en", "targetLang": "de", "model": "m", "apiKey": KEY,
+        "systemPrompt": "From {sourceLang} to {targetLang}", "temperature": 5, "topP": -1, "topK": 400.6,
+        "maxOutputTokens": 10**9, "presencePenalty": 9, "frequencyPenalty": -9, "seed": 4.6,
+        "thinkingLevel": "bogus",
+    })
+    assert r.status_code == 200 and r.json()["translatedText"] == "out"
+    c = calls[0]
+    assert c["args"][2].startswith("From English to German\nCODE/MARKUP RULES")
+    kw = c["kwargs"]
+    assert (kw["temperature"], kw["top_p"], kw["top_k"]) == (1, 0, 100)
+    assert kw["max_output_tokens"] == 65536 and kw["presence_penalty"] == 2 and kw["frequency_penalty"] == -2
+    assert kw["seed"] == 5 and kw["thinking_level"] is None
+
+
+def test_claude_godmode_gates(monkeypatch):
+    calls = []
