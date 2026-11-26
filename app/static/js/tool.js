@@ -268,3 +268,18 @@
             valueLabel.textContent = fmtParam(spec, n);
           });
         }
+        input = el("div", { class: "stack", style: "gap: 6px" }, slider, numberBox);
+      }
+      return el("div", { class: "gm-control" + (spec.disabled ? " disabled" : "") },
+        el("div", { class: "gm-head" }, el("span", {}, spec.label), valueLabel),
+        input,
+        spec.note ? el("span", { class: "gm-note" }, spec.note) : null);
+    }));
+  }
+
+  if (isGod) {
+    S.god = godDefaults(false);
+    $("system-prompt").value = templateFor(S.target);
+    $("btn-reset-prompt").addEventListener("click", () => { $("system-prompt").value = templateFor(S.target); });
+    $("btn-reset-all").addEventListener("click", () => {
+      $("system-prompt").value = templateFor(S.target);
