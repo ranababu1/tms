@@ -13,3 +13,18 @@
   let w = 0, h = 0, dpr = 1, particles = [], raf = 0;
   const mouse = { x: -9999, y: -9999, active: false };
 
+  const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+  const rand = (a, b) => a + Math.random() * (b - a);
+
+  function resize() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = rect.width; h = rect.height;
+    canvas.width = Math.floor(w * dpr);
+    canvas.height = Math.floor(h * dpr);
+    canvas.style.width = w + "px";
+    canvas.style.height = h + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const count = clamp(Math.floor((w * h) / 9000), 70, 220);
+    particles = Array.from({ length: count }, () => ({
+      x: rand(0, w), y: rand(0, h),
