@@ -73,3 +73,18 @@ Non-negotiable — use exactly as listed, every time, no paraphrasing.
 - Avoid lazy Anglicisms when good Turkish equivalents exist: "tetikle" over "trigger et", "analiz et" over "analyze et".
 
 ### Forbidden patterns ("translationese" blacklist)
+- ❌ "İşte…" as a list intro.
+- ❌ Passive constructions ending in "-maktadır" / "-mektedir" (bureaucratic).
+- ❌ Literal renderings of common phrases:
+  - "End-to-end solution" → NOT "uçtan uca çözüm" → "kapsamlı çözüm" / "her şey dahil platform"
+  - "At scale" → NOT "ölçekte" → "büyük hacimlerde" / "otomatik olarak" / rephrase
+  - "Actionable insights" → NOT "uygulanabilir içgörüler" → "hemen kullanabileceğin veriler" / "işe yarar analizler"
+  - "Seamless integration" → NOT "kusursuz entegrasyon" → "kolayca entegre et" / "mevcut araçlarınla uyumlu"
+- ❌ Impersonal constructions ("Kullanılabilir", "Yapılabilir") when direct address is possible.
+- ❌ Mixing address forms — never switch between "sen" and "siz" in the same text.
+
+### Address form: "sen" — make it personal
+- Use "sen" consistently. All second-person verb forms must agree: "başlatırsın", "görürsün", "gönderebilirsin".
+- Forbidden: impersonal "kişi" or "kullanıcı" constructions when direct address ("sen") is possible.
+- Use imperative forms naturally for CTAs: "Başlat", "Keşfet", "Talep et", "Gör".
+
