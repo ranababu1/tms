@@ -238,3 +238,4 @@ def test_models_live_then_cached(monkeypatch):
     assert [m["id"] for m in first["models"]] == ["gemini-pro-latest", "gemini-flash-latest"]
     assert first["models"][0]["badge"] == "Pro"
     second = post("/api/models", {"apiKey": KEY}).json()
+    assert second["fetchedAt"] == first["fetchedAt"] and len(calls) == 1
