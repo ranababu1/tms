@@ -328,3 +328,18 @@ async def fix(provider: str, body: dict) -> dict:
     return {"translatedText": c.text.strip(), "usage": c.usage.as_dict()}
 
 
+# ---- review (Gemini only) -------------------------------------------------
+
+async def review_gemini(body: dict) -> dict:
+    original, translated = _s(body, "originalText"), _s(body, "translatedText")
+    target, model = _s(body, "targetLang"), _s(body, "model")
+    _require(bool(original.strip()), "Original text is required.")
+    _require(bool(translated.strip()), "Translated text is required.")
+    _require(bool(target), "Target language is required.")
+    _require(bool(model), "Model selection is required.")
+    _require(_key_ok(body), "A valid Gemini API key is required.")
+
+    # Accept a code or a name; the original contract sends the name.
+    target_name = language_name(target)
+    system, user = pb.build_review_prompts(original, translated, target_name)
+    try:
