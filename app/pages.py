@@ -13,3 +13,18 @@ GEMINI_LOADING = [
     "Formatting output for quick use",
     "Cutting hours of manual effort",
 ]
+CLAUDE_LOADING = ["Powered by Anthropic Models", *GEMINI_LOADING[1:]]
+
+PROVIDERS = {
+    "gemini": {
+        "name": "Gemini",
+        "keyStorage": "gemini_translator_api_key",
+        "verifyStorage": "gemini_translator_verify_enabled",
+        "targetStorage": "gemini_translator_target_lang",
+        "keyLink": "https://aistudio.google.com/apikey",
+        "keyPlaceholder": "Paste your Google AI Studio API key",
+        "noKeyError": "Please set your Gemini API key using the button in the top navigation.",
+        "modelsEndpoint": "/api/models",
+        "fallbackModels": M.gemini_fallback_models,
+    },
+    "claude": {
