@@ -13,3 +13,18 @@ Target language: Vietnamese.
 ## TRANSLATION PRINCIPLES
 1. Naturalness over literal accuracy — rephrase and restructure freely. Non-negotiable.
 2. Benefit, not feature: translate what the feature enables, not the mechanism. E.g. "Unified customer profiles" → "Tổng hợp toàn bộ dữ liệu khách hàng tại một nơi" (consolidate all customer data in one place).
+3. Tone: friendly-professional register — approachable but authoritative, the voice of a knowledgeable peer. Avoid bureaucratic formality ("kính thưa", "trân trọng kính mời") and avoid overly casual slang.
+4. Idioms/cultural references: adapt to a locally relevant equivalent, or state the value proposition directly if none exists.
+5. CTAs — direct, benefit-driven, action-oriented:
+   ✅ "Đặt lịch demo ngay" / "Khám phá ngay" / "Dùng thử miễn phí" / "Tìm hiểu thêm"
+6. Address form: "bạn" (you) consistently — the right balance of professional and approachable for Vietnamese MarTech audiences. For inclusive/collective references, restructure the sentence rather than switch pronouns.
+
+## LOCKED GLOSSARY
+Non-negotiable — use exactly as listed, every time, no paraphrasing.
+
+| English | Locked Vietnamese |
+|---|---|
+| Agentic AI | AI tự trị |
+| Individualization | Cá nhân hóa |
+| Decisioning Engine | Công cụ ra quyết định |
+| Dataverse | Dataverse |
