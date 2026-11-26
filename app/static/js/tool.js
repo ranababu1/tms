@@ -673,3 +673,18 @@
     keyInput.type = show ? "text" : "password";
     keyToggle.textContent = show ? "Hide" : "Show";
   });
+  keyInput.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); saveKey(); } });
+  keyModal.addEventListener("click", (e) => { if (e.target === keyModal) closeKeyModal(); });
+
+  // ---------- model info modal ----------
+  const modelModal = $("model-modal");
+  function openModelModal() {
+    const head = ["Model", "ID", "Input limit", "Output limit", "Per 1M in / out (USD)", "Per 1M in / out (INR)", "Per 1 lakh chars"];
+    const rows = S.models.map((m) => {
+      const p = m.pricing;
+      return el("tr", { class: m.id === S.model ? "selected" : null },
+        el("td", {}, m.label, m.badge ? el("span", { class: "tag" }, m.badge) : null,
+          m.id === S.model ? el("span", { class: "tag sel" }, "Selected") : null),
+        el("td", { class: "faint" }, m.id),
+        el("td", {}, full.format(m.inputTokenLimit)),
+        el("td", {}, full.format(m.outputTokenLimit)),
