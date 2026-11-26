@@ -103,3 +103,18 @@ def title_case_id(model_id: str) -> str:
 
 
 def claude_model(model_id: str, label: str | None = None) -> dict:
+    family = claude_family(model_id) or "sonnet"
+    pricing = CLAUDE_EXACT_PRICING.get(model_id) or CLAUDE_FAMILY_PRICING[family]
+    return {
+        "id": model_id,
+        "label": label or title_case_id(model_id),
+        "badge": family.capitalize(),
+        "isPro": family == "opus",
+        **CLAUDE_FAMILY_LIMITS[family],
+        "supportsSampling": supports_sampling_params(model_id),
+        "supportsEffort": supports_effort(model_id),
+        "pricing": pricing_summary(pricing),
+    }
+
+
+def claude_fallback_models() -> list[dict]:
