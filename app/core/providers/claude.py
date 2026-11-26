@@ -58,3 +58,18 @@ async def create_message(
     if top_k is not None:
         body["top_k"] = top_k
     if effort is not None:
+        body["output_config"] = {"effort": effort}
+
+    data = await _request("POST", "/messages", api_key, json=body)
+    text = next(
+        (b.get("text", "") for b in data.get("content") or [] if b.get("type") == "text"), ""
+    )
+    usage = data.get("usage") or {}
+    inp, out = usage.get("input_tokens", 0), usage.get("output_tokens", 0)
+    stop = data.get("stop_reason")
+    return Completion(
+        text=text,
+        usage=Usage(inp, out, inp + out),
+        finish_reason="max_tokens" if stop == "max_tokens" else stop,
+    )
+
