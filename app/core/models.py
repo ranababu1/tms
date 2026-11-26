@@ -58,3 +58,18 @@ CLAUDE_FAMILY_LIMITS = {
     "opus": {"inputTokenLimit": 1_000_000, "outputTokenLimit": 128_000},
     "sonnet": {"inputTokenLimit": 1_000_000, "outputTokenLimit": 128_000},
     "haiku": {"inputTokenLimit": 200_000, "outputTokenLimit": 64_000},
+}
+CLAUDE_EXACT_PRICING = {
+    "claude-opus-5-5": {"inputPer1M": 4.0, "outputPer1M": 20.0},
+    "claude-sonnet-5": {"inputPer1M": 2.0, "outputPer1M": 10.0},
+    "claude-haiku-4-5": {"inputPer1M": 1.0, "outputPer1M": 5.0},
+}
+CLAUDE_FAMILY_PRICING = {
+    "opus": {"inputPer1M": 4.0, "outputPer1M": 20.0},
+    "sonnet": {"inputPer1M": 2.0, "outputPer1M": 10.0},
+    "haiku": {"inputPer1M": 1.0, "outputPer1M": 5.0},
+}
+CLAUDE_FALLBACK = [
+    ("claude-opus-5-5", "Claude Opus 5.5"),
+    ("claude-sonnet-5", "Claude Sonnet 5"),
+    ("claude-haiku-4-5", "Claude Haiku 4.5"),
