@@ -58,3 +58,18 @@ Non-negotiable — use exactly as listed, every time, no paraphrasing.
   ✅ "Die Plattform löst die Kampagne aus." / "Du löst die Kampagne mit einem Klick aus."
 
 ### List introductions — vary, benefit-oriented
+- Never repeat the same intro. Forbidden: "Hier sind die wichtigsten Funktionen", "Das bietet Ihnen CleverTap".
+- Rotate benefit-focused intros: "Deine Vorteile auf einen Blick:" / "So profitierst du:" / "Das kannst du erreichen:" / "Im Einzelnen:" — or skip the lead-in and start bullets directly.
+
+### Punctuation — native German patterns
+- Use colons (:) sparingly; a list can follow a complete sentence without one.
+- Avoid semicolons (;) as sentence connectors — use a period or a dash (–) for emphasis.
+- Enumerations in running text: commas, not semicolons.
+
+### Technical terms — consistency & cleanliness
+- First use: well-known English term, German equivalent in parentheses only if uncommon. Don't over-explain to an expert audience. E.g. "Customer-Data-Platform (CDP)" on first mention, then just "CDP" or "die Plattform".
+- Mandatory correct spelling: "E‑Mail" (hyphen, capital E, capital M — never "Email"), "Push-Benachrichtigung", "Customer Engagement", "Retention", "Dashboard", "Workflow".
+- Never mix English and German in one compound word (no "Trigger-basiert") — use "triggerbasiert" or "auslöserbasiert".
+
+### Forbidden patterns ("translationese" blacklist)
+- ❌ "Hier sind …" as a list intro.
