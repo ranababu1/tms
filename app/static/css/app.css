@@ -28,3 +28,18 @@ body[data-accent="amber"] { --accent: #f59e0b; --accent-soft: rgba(245, 158, 11,
 html, body { margin: 0; padding: 0; }
 body {
   background: var(--surface-base);
+  color: var(--text-body);
+  font-family: var(--font-display);
+  font-size: 14px;
+  line-height: 1.55;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button, input, select, textarea { font: inherit; color: inherit; }
+.font-body { font-family: var(--font-body); }
+.muted { color: var(--text-muted); }
+.faint { color: var(--text-faint); }
+.hidden { display: none !important; }
+
