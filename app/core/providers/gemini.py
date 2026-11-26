@@ -43,3 +43,18 @@ def _finish_reason(response) -> str | None:
 async def generate(
     api_key: str,
     model: str,
+    system: str,
+    user: str,
+    *,
+    disable_safety: bool = False,
+    thinking_level: str | None = None,
+    **params,
+) -> Completion:
+    """params map 1:1 onto GenerateContentConfig (temperature, top_p, max_output_tokens, ...)."""
+    config = types.GenerateContentConfig(
+        system_instruction=system,
+        safety_settings=SAFETY_OFF if disable_safety else None,
+        thinking_config=types.ThinkingConfig(thinking_level=thinking_level) if thinking_level else None,
+        **{k: v for k, v in params.items() if v is not None},
+    )
+    contents = [types.Content(role="user", parts=[types.Part(text=user)])]
