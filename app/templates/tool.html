@@ -43,3 +43,18 @@
       <div class="field">
         <label class="field-label" for="target-select">To</label>
         <select class="select" id="target-select"></select>
+      </div>
+    </div>
+  </section>
+
+  {% if god %}
+  <!-- God Mode: system prompt + parameters -->
+  <section class="glass-card card-pad">
+    <div class="section-head">
+      <h3>System prompt</h3>
+      <div class="header-actions">
+        <button class="btn btn-sm" id="btn-reset-prompt" type="button">Reset</button>
+        <button class="btn btn-sm" id="btn-reset-all" type="button">Reset all</button>
+      </div>
+    </div>
+    <textarea class="textarea prompt-textarea" id="system-prompt" spellcheck="false"></textarea>
