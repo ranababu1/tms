@@ -28,3 +28,18 @@ async def _run(request: Request, handler: Handler) -> JSONResponse:
     if not isinstance(body, dict):
         return error(400, "Invalid request body.")
     try:
+        return JSONResponse(await handler(body))
+    except ServiceError as exc:
+        return error(exc.status, exc.message)
+    except Exception as exc:  # never log the body: it contains the API key
+        log.error("Unhandled error in %s: %s", request.url.path, type(exc).__name__)
+        return error(500, "An unexpected error occurred. Please try again.")
+
+
+def _route(path: str, handler: Handler) -> None:
+    async def endpoint(request: Request) -> JSONResponse:
+        return await _run(request, handler)
+
+    endpoint.__name__ = "api_" + path.strip("/").replace("-", "_")
+    router.add_api_route(path, endpoint, methods=["POST"])
+
