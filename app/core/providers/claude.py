@@ -28,3 +28,18 @@ def _error_message(response: httpx.Response) -> str:
 
 async def _request(method: str, path: str, api_key: str, **kwargs) -> dict:
     try:
+        async with httpx.AsyncClient(timeout=PROVIDER_TIMEOUT_SECONDS) as client:
+            response = await client.request(method, API_BASE + path, headers=_headers(api_key), **kwargs)
+    except httpx.HTTPError as exc:
+        raise ProviderError(f"Could not reach Anthropic: {type(exc).__name__}") from None
+    if response.status_code >= 400:
+        raise ProviderError(_error_message(response), response.status_code)
+    return response.json()
+
+
+async def create_message(
+    api_key: str,
+    model: str,
+    system: str,
+    user: str,
+    max_tokens: int,
