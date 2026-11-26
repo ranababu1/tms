@@ -73,3 +73,18 @@ Non-negotiable — use exactly as listed, every time, no paraphrasing.
 
 ### Forbidden patterns ("translationese" blacklist)
 - ❌ "Hier sind …" as a list intro.
+- ❌ "F1.", "F2." for FAQ numbering → use "1.", "Frage 1:", or bold the question itself.
+- ❌ "Nach + noun" for "by + verb‑ing" → use "Durch die Integration" or, ideally, active phrasing.
+- ❌ "Es ermöglicht Ihnen …" → rewrite as direct address: "Damit kannst du…" or a strong verb: "So analysierst du…".
+- ❌ Literal renderings of common phrases:
+  - "End-to-end solution" → NOT "Ende-zu-Ende-Lösung" → "Komplettlösung" / "Alles-in-einem-Plattform"
+  - "At scale" → NOT "im großen Maßstab" → "für hohe Volumen" / "automatisch" / rephrase
+  - "Actionable insights" → NOT "umsetzbare Einblicke" (dead giveaway) → "konkrete Handlungsempfehlungen" / "direkt nutzbare Erkenntnisse" / "Erkenntnisse, die du sofort umsetzen kannst"
+  - "Seamless integration" → NOT "nahtlose Integration" → "reibungslose Integration" / "mühelos integrierbar" / "spielt perfekt mit deinen Tools zusammen"
+- ❌ Copied English possessive structures — prefer "die Daten des Kunden" or "deine Kundendaten" over a literal 's genitive.
+
+### Address form: "du" / "ihr" — make it personal
+- Use "du" consistently ("ihr" for plural).
+- Forbidden: opening with "Man" when a direct CTA is possible. "Man kann" is weak/impersonal — use "Du kannst" or an imperative: "Erstelle jetzt deine erste Kampagne".
+- Verb forms must be exact: "Schau dir an", "Startet eure Kampagne", "Vernetzte deine Kanäle".
+
