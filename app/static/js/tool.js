@@ -43,3 +43,18 @@
     let res;
     try {
       res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+    } catch {
+      throw new Error("Network error. Check your connection and try again.");
+    }
+    let data = null;
+    try { data = await res.json(); } catch { /* non-JSON body */ }
+    if (!res.ok) throw new Error((data && data.error) || `Request failed (${res.status}).`);
+    return data;
+  }
+
+  // ---------- state ----------
+  const S = {
