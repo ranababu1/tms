@@ -43,3 +43,18 @@
         const dist = Math.hypot(dx, dy);
         if (dist < ATTRACT_RADIUS && dist > 1) {
           const f = 1 - dist / ATTRACT_RADIUS;
+          p.vx += (dx / dist) * ATTRACT_STRENGTH * f - (dy / dist) * SWIRL_STRENGTH * f;
+          p.vy += (dy / dist) * ATTRACT_STRENGTH * f + (dx / dist) * SWIRL_STRENGTH * f;
+        }
+      }
+      p.vx += rand(-0.01, 0.01); p.vy += rand(-0.01, 0.01);
+      const speed = Math.hypot(p.vx, p.vy);
+      if (speed > MAX_SPEED) { p.vx = (p.vx / speed) * MAX_SPEED; p.vy = (p.vy / speed) * MAX_SPEED; }
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x += w; else if (p.x > w) p.x -= w;
+      if (p.y < 0) p.y += h; else if (p.y > h) p.y -= h;
+    }
+
+    for (let i = 0; i < particles.length; i++) {
+      const a = particles[i];
+      for (let j = i + 1; j < particles.length; j++) {
