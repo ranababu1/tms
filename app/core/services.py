@@ -193,3 +193,18 @@ async def godmode_gemini(body: dict) -> dict:
         "frequency_penalty": _clamp(_num(body, "frequencyPenalty", 0), -2, 2),
         "seed": round(seed) if seed_ok else None,
     }
+    system = pb.build_godmode_system_prompt(_s(body, "systemPrompt"), source, target)
+    try:
+        c = await gemini.generate(
+            _s(body, "apiKey"), model, system, text, disable_safety=True,
+            thinking_level=level if level in M.GEMINI_THINKING_LEVELS else None, **params,
+        )
+    except ProviderError as exc:
+        raise ServiceError(500, exc.message) from None
+    if c.finish_reason == "safety":
+        raise ServiceError(422, "Content blocked by safety filters.")
+    if not c.text.strip():
+        raise ServiceError(500, "No translation returned. The model may have produced empty output.")
+    return _godmode_response(c, body)
+
+
