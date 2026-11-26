@@ -73,3 +73,18 @@ def page_config(provider: str, mode: str) -> dict:
         "mode": mode,
         "providerName": prov["name"],
         "accent": page["accent"],
+        "title": page["title"],
+        "endpoints": {
+            "translate": page["translate"], "verify": page["verify"], "fix": page["fix"],
+            "review": page["review"], "models": prov["modelsEndpoint"],
+        },
+        "storage": {
+            "key": prov["keyStorage"],
+            "verify": prov["verifyStorage"] if mode == "simple" else None,
+            "target": prov["targetStorage"] if mode == "simple" else None,
+        },
+        "keyModal": {
+            "title": "Set Gemini API Key" if (provider, mode) == ("gemini", "simple") else "Set API Key",
+            "placeholder": prov["keyPlaceholder"],
+            "saveLabel": "Save API Key" if (provider, mode) == ("claude", "god") else "Save",
+            "showVerify": mode == "simple",
