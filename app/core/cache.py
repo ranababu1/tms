@@ -58,3 +58,5 @@ async def get_cached_models(name: str, fetch: Callable[[], Awaitable[list[dict]]
         raise
 
 
+def clear_memory_cache() -> None:
+    _memory.clear()
