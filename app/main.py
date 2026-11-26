@@ -43,3 +43,6 @@ def _register_tool_page(provider: str, mode: str, path: str) -> None:
     page.__name__ = f"page_{provider}_{mode}"
     app.add_api_route(path, page, methods=["GET"], response_class=HTMLResponse)
 
+
+for (provider, mode), info in PAGES.items():
+    _register_tool_page(provider, mode, info["path"])
