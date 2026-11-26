@@ -583,3 +583,18 @@
     resetResults();
     S.panel = "output";
     if (S.apiKey.trim().length < 10) { S.error = cfg.noKeyError; render(); return; }
+    if (!input.value.trim()) { S.error = "Please enter some text to translate."; render(); return; }
+
+    S.busy = true; S.phase = "translate"; S.loading = true;
+    startMessages();
+    render();
+    let result;
+    try {
+      result = await postJSON(cfg.endpoints.translate, translationBody());
+    } catch (e) {
+      S.error = e.message;
+      S.busy = false; S.loading = false; S.phase = null;
+      stopMessages(); render();
+      return;
+    }
+    stopMessages();
