@@ -388,3 +388,18 @@
     }
     if (r.state === "running") {
       return el("div", { class: "review-card loading-text-shimmer" }, "Review agent working on quality and accuracy checks...");
+    }
+    if (r.state === "error") {
+      return el("div", { class: "review-card" }, el("h4", {}, "Review Summary"), el("p", { class: "muted" }, r.error));
+    }
+    const res = r.result;
+    const issues = (res.issues || []).slice(0, 5);
+    return el("div", { class: "review-card animate-fade-in" },
+      el("h4", {}, "Review Summary"),
+      issues.length
+        ? el("ul", {}, issues.map((i) => el("li", {}, i)))
+        : el("p", { class: "muted" }, "No issues found. Translation looks good."),
+      res.correctedTranslation && !r.applied
+        ? el("button", { class: "btn btn-accent btn-sm", type: "button", onclick: () => {
+            S.translatedText = res.correctedTranslation;
+            S.review = { ...S.review, applied: true };
