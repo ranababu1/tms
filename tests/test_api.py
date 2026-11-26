@@ -28,3 +28,18 @@ def _isolate_cache(tmp_path, monkeypatch):
     yield
     cache.clear_memory_cache()
 
+
+def post(path, body):
+    return client.post(path, json=body)
+
+
+# ---- pages ----------------------------------------------------------------
+
+@pytest.mark.parametrize("path", ["/", "/translate", "/translate/claude", "/godmode", "/godmode/claude"])
+def test_pages_render(path):
+    r = client.get(path)
+    assert r.status_code == 200 and "<html" in r.text
+    if path != "/":
+        assert 'id="page-config"' in r.text
+
+
