@@ -223,3 +223,18 @@ async def godmode_claude(body: dict) -> dict:
         1, M.CLAUDE_GODMODE_MAX_OUTPUT_CAP,
     ))
     extra = _claude_sampling(
+        model,
+        _clamp(_num(body, "temperature", 0.7), 0, 1),
+        round(_clamp(_num(body, "topK", 40), 1, 500)),
+    )
+    effort = _s(body, "effort").lower()
+    if M.supports_effort(model) and effort in M.CLAUDE_EFFORT_LEVELS:
+        extra["effort"] = effort
+    system = pb.build_godmode_system_prompt(_s(body, "systemPrompt"), source, target)
+    try:
+        c = await claude.create_message(_s(body, "apiKey"), model, system, text, max_tokens, **extra)
+    except ProviderError as exc:
+        raise _claude_godmode_error(exc, model) from None
+    except Exception:
+        raise ServiceError(500, "An unexpected error occurred.") from None
+    if not c.text.strip():
