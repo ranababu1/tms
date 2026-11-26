@@ -13,3 +13,18 @@ CACHE_DIR = Path(__file__).resolve().parents[2] / ".cache"
 
 _memory: dict[str, dict] = {}
 
+
+def _path(name: str) -> Path:
+    return CACHE_DIR / f"{name}-models.json"
+
+
+def _load(name: str) -> dict | None:
+    if name in _memory:
+        return _memory[name]
+    try:
+        entry = json.loads(_path(name).read_text(encoding="utf-8"))
+        if isinstance(entry.get("models"), list) and isinstance(entry.get("fetchedAt"), (int, float)):
+            _memory[name] = entry
+            return entry
+    except (OSError, ValueError, AttributeError):
+        pass
