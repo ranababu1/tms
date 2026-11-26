@@ -703,3 +703,18 @@
   tokenMeta.addEventListener("click", openModelModal);
   tokenMeta.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openModelModal(); } });
   $("model-modal-close").addEventListener("click", () => modelModal.classList.add("hidden"));
+  modelModal.addEventListener("click", (e) => { if (e.target === modelModal) modelModal.classList.add("hidden"); });
+  window.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    closeKeyModal();
+    modelModal.classList.add("hidden");
+  });
+
+  // ---------- boot ----------
+  renderModelSelect();
+  renderLanguageSelects();
+  renderGodControls();
+  autoResize();
+  render();
+  refreshModels();
+})();
