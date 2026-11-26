@@ -178,3 +178,18 @@
     renderModelSelect();
     renderGodControls();
   });
+  sourceSelect.addEventListener("change", () => { S.source = sourceSelect.value; renderLanguageSelects(); });
+  targetSelect.addEventListener("change", () => { setTarget(targetSelect.value); renderLanguageSelects(); });
+  swapBtn.addEventListener("click", () => {
+    if (S.source === "auto") return;
+    const src = S.source;
+    S.source = S.target;
+    setTarget(src);
+    renderLanguageSelects();
+  });
+
+  async function refreshModels() {
+    const key = S.apiKey.trim();
+    if (key.length < 10 || S.fetchedForKey === key) return;
+    S.fetchedForKey = key;
+    try {
