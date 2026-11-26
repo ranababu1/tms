@@ -28,3 +28,18 @@ async def security_headers(request: Request, call_next):
     response.headers.setdefault("Referrer-Policy", "no-referrer")
     response.headers.setdefault("X-Frame-Options", "DENY")
     return response
+
+
+@app.get("/", response_class=HTMLResponse)
+async def landing(request: Request):
+    return templates.TemplateResponse(request, "landing.html", {})
+
+
+def _register_tool_page(provider: str, mode: str, path: str) -> None:
+    async def page(request: Request):
+        cfg = page_config(provider, mode)
+        return templates.TemplateResponse(request, "tool.html", {"cfg": cfg})
+
+    page.__name__ = f"page_{provider}_{mode}"
+    app.add_api_route(path, page, methods=["GET"], response_class=HTMLResponse)
+
