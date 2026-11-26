@@ -118,3 +118,18 @@
         temperature: 0.7, topK: 40, effort: "high",
         maxTokens: Math.min(L.claudeDefaultMaxTokens, godMaxCap()),
       };
+    }
+    return {
+      temperature: 0.7, topP: 0.95, topK: 40, presencePenalty: 0, frequencyPenalty: 0,
+      seed: "", thinkingLevel: "HIGH",
+      maxTokens: resetAll ? godMaxCap() : Math.min(L.geminiDefaultMaxTokens, godMaxCap()),
+    };
+  }
+  const templateFor = (lang) => (cfg.promptTemplates || {})[lang] || "";
+
+  // ---------- controls: model + languages ----------
+  const modelSelect = $("model-select");
+  const sourceSelect = $("source-select");
+  const targetSelect = $("target-select");
+  const swapBtn = $("swap-btn");
+
