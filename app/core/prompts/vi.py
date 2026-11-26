@@ -28,3 +28,18 @@ Non-negotiable — use exactly as listed, every time, no paraphrasing.
 | Individualization | Cá nhân hóa |
 | Decisioning Engine | Công cụ ra quyết định |
 | Dataverse | Dataverse |
+| Lifecycle Campaigns | Chiến dịch vòng đời |
+| Customer Engagement | Tương tác khách hàng |
+| Push Notifications | Thông báo đẩy |
+| Retention | Giữ chân khách hàng |
+| Onboarding | Onboarding |
+| Dashboard | Bảng điều khiển |
+| Workflow | Quy trình làm việc |
+| Reporting | Báo cáo |
+
+## STYLE RULES (critical for natural output)
+
+### Sentence length & structure
+- Vietnamese sentences are naturally compact. Break long English sentences — especially those with multiple embedded clauses — into shorter Vietnamese ones.
+- Max 20 words/sentence, natural flowing rhythm.
+- Structure is generally SVO, but topic-comment structures are common and natural — use them to front-load the benefit.
