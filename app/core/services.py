@@ -268,3 +268,18 @@ async def _complete(provider: str, body: dict, system: str, user: str,
             )
         return await claude.create_message(
             _s(body, "apiKey"), model, system, user, max_tokens,
+            **_claude_sampling(model, temperature),
+        )
+    except ProviderError as exc:
+        # Claude verify/fix forward the provider status; Gemini errors are 500s.
+        status = exc.status if provider == "claude" and exc.status else 500
+        raise ServiceError(status, exc.message) from None
+
+
+async def verify(provider: str, body: dict) -> dict:
+    original, translated = _s(body, "originalText"), _s(body, "translatedText")
+    target, model = _s(body, "targetLang"), _s(body, "model")
+    _require(bool(original.strip()), "Original text is required.")
+    _require(bool(translated.strip()), "Translated text is required.")
+    _require(bool(target), "Target language is required.")
+    _require(_key_ok(body), _PROVIDER_KEY_MSG[provider])
