@@ -88,3 +88,15 @@ def build_fix_user_message(original: str, current: str) -> str:
 def build_godmode_system_prompt(system_prompt: str, source_lang: str, target_lang: str) -> str:
     src_name = "auto-detected" if source_lang == "auto" else language_name(source_lang)
     prompt = system_prompt.replace("{sourceLang}", src_name)
+    prompt = prompt.replace("{targetLang}", language_name(target_lang))
+    return prompt + common.GODMODE_HARDCODED_RULES
+
+
+def build_review_prompts(original: str, translated: str, target_name: str) -> tuple[str, str]:
+    system = common.REVIEW_SYSTEM.replace("{targetLangName}", target_name)
+    user = (
+        common.REVIEW_USER.replace("{originalText}", original)
+        .replace("{targetLangName}", target_name)
+        .replace("{translatedText}", translated)
+    )
+    return system, user
